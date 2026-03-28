@@ -1,0 +1,17 @@
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/package_run_dependencies/ros_gz_example_application
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/parent_prefix_path/ros_gz_example_application
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/ament_prefix_path.sh
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/ament_prefix_path.dsv
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/path.sh
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/path.dsv
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.bash
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.sh
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.zsh
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.dsv
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.dsv
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/packages/ros_gz_example_application
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/cmake/ros_gz_example_applicationConfig.cmake
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/cmake/ros_gz_example_applicationConfig-version.cmake
+-- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.xml

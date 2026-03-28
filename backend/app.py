@@ -22,7 +22,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Initialize Socket.IO with threading mode (default)
-socketio = SocketIO(app, cors_allowed_origins="*", logger=False, engineio_logger=False)
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 # Global vehicle state (thread-safe access)
 vehicle_state = {
@@ -76,6 +76,7 @@ class AGVPoseSubscriber(Node):
     ROS2 Node for subscribing to AGV pose data from Gazebo simulation
 
     Gazebo Pose Subscription:
+    
     - Subscribes to /diff_drive/odometry (bridged from Gazebo via ros_gz_bridge)
     - Extracts position (x, y), orientation (quaternion → yaw), and velocity
     - Emits real-time data to Socket.IO clients
@@ -145,6 +146,7 @@ class AGVPoseSubscriber(Node):
         }
 
         # Emit to all connected clients
+        print(f"Emitting pose data: x={x:.2f}, y={y:.2f}, heading={heading:.2f}")
         socketio.emit('vehicle_pose', pose_data, namespace='/')
 
 
@@ -334,7 +336,7 @@ if __name__ == '__main__':
 
     # Run Flask-SocketIO server with threading mode
     try:
-        socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+        socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True, debug=True)
     except KeyboardInterrupt:
         print("\nShutting down server...")
     finally:

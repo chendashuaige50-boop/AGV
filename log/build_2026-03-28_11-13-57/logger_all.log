@@ -1,0 +1,508 @@
+[0.054s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.054s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=32, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7861ad6ce050>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7861ad6cd9c0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7861ad6cd9c0>>, mixin_verb=('build',))
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.159s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.159s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/loong/AGV_sim/src'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.159s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(Gazebo_Harbour_Models) by extensions ['ignore', 'ignore_ament_install']
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(Gazebo_Harbour_Models) by extension 'ignore'
+[0.165s] Level 1:colcon.colcon_core.package_identification:_identify(Gazebo_Harbour_Models) ignored
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.168s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.169s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore_ament_install'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_pkg']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_pkg'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_meta']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_meta'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ros']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ros'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['cmake', 'python']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'cmake'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python'
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['python_setup_py']
+[0.170s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python_setup_py'
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extensions ['ignore', 'ignore_ament_install']
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extension 'ignore'
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extension 'ignore_ament_install'
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extensions ['colcon_pkg']
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extension 'colcon_pkg'
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extensions ['colcon_meta']
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extension 'colcon_meta'
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extensions ['ros']
+[0.171s] Level 1:colcon.colcon_core.package_identification:_identify(harbour_assets_description) by extension 'ros'
+[0.172s] DEBUG:colcon.colcon_core.package_identification:Package 'harbour_assets_description' with type 'ros.ament_cmake' and name 'harbour_assets_description'
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['ignore', 'ignore_ament_install']
+[0.172s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'ignore'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'ignore_ament_install'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['colcon_pkg']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'colcon_pkg'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['colcon_meta']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'colcon_meta'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['ros']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'ros'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['cmake', 'python']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'cmake'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'python'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extensions ['python_setup_py']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template) by extension 'python_setup_py'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extensions ['ignore', 'ignore_ament_install']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extension 'ignore'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extension 'ignore_ament_install'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extensions ['colcon_pkg']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extension 'colcon_pkg'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extensions ['colcon_meta']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extension 'colcon_meta'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extensions ['ros']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_application) by extension 'ros'
+[0.174s] DEBUG:colcon.colcon_core.package_identification:Package 'ros_gz_project_template/ros_gz_example_application' with type 'ros.ament_cmake' and name 'ros_gz_example_application'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extension 'ignore_ament_install'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extensions ['colcon_pkg']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extension 'colcon_pkg'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extensions ['colcon_meta']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extension 'colcon_meta'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extensions ['ros']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_bringup) by extension 'ros'
+[0.174s] DEBUG:colcon.colcon_core.package_identification:Package 'ros_gz_project_template/ros_gz_example_bringup' with type 'ros.ament_cmake' and name 'ros_gz_example_bringup'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extension 'ignore_ament_install'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extensions ['colcon_pkg']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extension 'colcon_pkg'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extensions ['colcon_meta']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extension 'colcon_meta'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extensions ['ros']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_description) by extension 'ros'
+[0.175s] DEBUG:colcon.colcon_core.package_identification:Package 'ros_gz_project_template/ros_gz_example_description' with type 'ros.ament_cmake' and name 'ros_gz_example_description'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extension 'ignore'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extension 'ignore_ament_install'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extensions ['colcon_pkg']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extension 'colcon_pkg'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extensions ['colcon_meta']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extension 'colcon_meta'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extensions ['ros']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(ros_gz_project_template/ros_gz_example_gazebo) by extension 'ros'
+[0.176s] DEBUG:colcon.colcon_core.package_identification:Package 'ros_gz_project_template/ros_gz_example_gazebo' with type 'ros.ament_cmake' and name 'ros_gz_example_gazebo'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['ignore', 'ignore_ament_install']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'ignore'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'ignore_ament_install'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['colcon_pkg']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'colcon_pkg'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['colcon_meta']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'colcon_meta'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['ros']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'ros'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['cmake', 'python']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'cmake'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'python'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extensions ['python_setup_py']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard) by extension 'python_setup_py'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['ignore', 'ignore_ament_install']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'ignore'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'ignore_ament_install'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['colcon_pkg']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'colcon_pkg'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['colcon_meta']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'colcon_meta'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['ros']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'ros'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['cmake', 'python']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'cmake'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'python'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extensions ['python_setup_py']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static) by extension 'python_setup_py'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['ignore', 'ignore_ament_install']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'ignore'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'ignore_ament_install'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['colcon_pkg']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'colcon_pkg'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['colcon_meta']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'colcon_meta'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['ros']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'ros'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['cmake', 'python']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'cmake'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'python'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extensions ['python_setup_py']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css) by extension 'python_setup_py'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['ignore', 'ignore_ament_install']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'ignore'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'ignore_ament_install'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['colcon_pkg']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'colcon_pkg'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['colcon_meta']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'colcon_meta'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['ros']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'ros'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['cmake', 'python']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'cmake'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'python'
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extensions ['python_setup_py']
+[0.177s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/css/images) by extension 'python_setup_py'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['ignore', 'ignore_ament_install']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'ignore'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'ignore_ament_install'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['colcon_pkg']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'colcon_pkg'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['colcon_meta']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'colcon_meta'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['ros']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'ros'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['cmake', 'python']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'cmake'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'python'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extensions ['python_setup_py']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/js) by extension 'python_setup_py'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['ignore', 'ignore_ament_install']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'ignore'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'ignore_ament_install'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['colcon_pkg']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'colcon_pkg'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['colcon_meta']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'colcon_meta'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['ros']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'ros'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['cmake', 'python']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'cmake'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'python'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extensions ['python_setup_py']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/static/tiles) by extension 'python_setup_py'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['ignore', 'ignore_ament_install']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'ignore'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'ignore_ament_install'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['colcon_pkg']
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'colcon_pkg'
+[0.178s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['colcon_meta']
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'colcon_meta'
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['ros']
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'ros'
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['cmake', 'python']
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'cmake'
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'python'
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extensions ['python_setup_py']
+[0.179s] Level 1:colcon.colcon_core.package_identification:_identify(web_dashboard/templates) by extension 'python_setup_py'
+[0.179s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.179s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.179s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.179s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.179s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.197s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.197s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.198s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/loong/AGV_sim/install
+[0.199s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 381 installed packages in /opt/ros/humble
+[0.200s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_args' from command line to 'None'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_target' from command line to 'None'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.220s] Level 5:colcon.colcon_core.verb:set package 'harbour_assets_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.220s] DEBUG:colcon.colcon_core.verb:Building package 'harbour_assets_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/loong/AGV_sim/src/build/harbour_assets_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/loong/AGV_sim/src/install/harbour_assets_description', 'merge_install': False, 'path': '/home/loong/AGV_sim/src/harbour_assets_description', 'symlink_install': True, 'test_result_base': None}
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_target' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_clean_cache' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_clean_first' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'cmake_force_configure' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'ament_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'catkin_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_application' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.221s] DEBUG:colcon.colcon_core.verb:Building package 'ros_gz_example_application' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/loong/AGV_sim/src/build/ros_gz_example_application', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/loong/AGV_sim/src/install/ros_gz_example_application', 'merge_install': False, 'path': '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_application', 'symlink_install': True, 'test_result_base': None}
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_target' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.221s] DEBUG:colcon.colcon_core.verb:Building package 'ros_gz_example_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/loong/AGV_sim/src/build/ros_gz_example_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/loong/AGV_sim/src/install/ros_gz_example_description', 'merge_install': False, 'path': '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_description', 'symlink_install': True, 'test_result_base': None}
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.221s] DEBUG:colcon.colcon_core.verb:Building package 'ros_gz_example_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo', 'merge_install': False, 'path': '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_gazebo', 'symlink_install': True, 'test_result_base': None}
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_target' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.221s] Level 5:colcon.colcon_core.verb:set package 'ros_gz_example_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.221s] DEBUG:colcon.colcon_core.verb:Building package 'ros_gz_example_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/loong/AGV_sim/src/build/ros_gz_example_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/loong/AGV_sim/src/install/ros_gz_example_bringup', 'merge_install': False, 'path': '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_bringup', 'symlink_install': True, 'test_result_base': None}
+[0.221s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.222s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.222s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_description' with build type 'ament_cmake'
+[0.222s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_description'
+[0.224s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.224s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.224s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.226s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/loong/AGV_sim/src/harbour_assets_description' with build type 'ament_cmake'
+[0.226s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/loong/AGV_sim/src/harbour_assets_description'
+[0.226s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.226s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.228s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_application' with build type 'ament_cmake'
+[0.228s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_application'
+[0.228s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.228s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.232s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_description -- -j32 -l32
+[0.233s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/harbour_assets_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/harbour_assets_description -- -j32 -l32
+[0.234s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_application': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_application -- -j32 -l32
+[0.256s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/harbour_assets_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/harbour_assets_description -- -j32 -l32
+[0.263s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/harbour_assets_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/harbour_assets_description
+[0.264s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_description -- -j32 -l32
+[0.265s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_description
+[0.266s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_application' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_application -- -j32 -l32
+[0.267s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_application': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_application
+[0.348s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_application)
+[0.349s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_application' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_application
+[0.355s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application' for CMake module files
+[0.355s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application' for CMake config files
+[0.355s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_application', 'cmake_prefix_path')
+[0.356s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.ps1'
+[0.356s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.dsv'
+[0.357s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.sh'
+[0.358s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/bin'
+[0.358s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/lib/pkgconfig/ros_gz_example_application.pc'
+[0.358s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/lib/python3.10/site-packages'
+[0.358s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/bin'
+[0.358s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.ps1'
+[0.359s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.dsv'
+[0.359s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.sh'
+[0.360s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.bash'
+[0.361s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.zsh'
+[0.361s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_application/share/colcon-core/packages/ros_gz_example_application)
+[0.362s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_application)
+[0.362s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application' for CMake module files
+[0.362s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application' for CMake config files
+[0.362s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_application', 'cmake_prefix_path')
+[0.363s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.ps1'
+[0.363s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.dsv'
+[0.363s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/hook/cmake_prefix_path.sh'
+[0.364s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/bin'
+[0.364s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/lib/pkgconfig/ros_gz_example_application.pc'
+[0.364s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/lib/python3.10/site-packages'
+[0.364s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_application/bin'
+[0.364s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.ps1'
+[0.365s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.dsv'
+[0.365s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.sh'
+[0.365s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.bash'
+[0.365s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.zsh'
+[0.366s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_application/share/colcon-core/packages/ros_gz_example_application)
+[0.370s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_description)
+[0.370s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description' for CMake module files
+[0.371s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_description
+[0.371s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description' for CMake config files
+[0.371s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_description', 'cmake_prefix_path')
+[0.371s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.ps1'
+[0.371s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.dsv'
+[0.372s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.sh'
+[0.372s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/bin'
+[0.372s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/lib/pkgconfig/ros_gz_example_description.pc'
+[0.372s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/lib/python3.10/site-packages'
+[0.372s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/bin'
+[0.372s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.ps1'
+[0.372s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.dsv'
+[0.372s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.sh'
+[0.373s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.bash'
+[0.373s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.zsh'
+[0.373s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_description/share/colcon-core/packages/ros_gz_example_description)
+[0.373s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_description)
+[0.373s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description' for CMake module files
+[0.373s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description' for CMake config files
+[0.373s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_description', 'cmake_prefix_path')
+[0.373s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.ps1'
+[0.374s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.dsv'
+[0.374s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/hook/cmake_prefix_path.sh'
+[0.374s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/bin'
+[0.374s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/lib/pkgconfig/ros_gz_example_description.pc'
+[0.374s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/lib/python3.10/site-packages'
+[0.374s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_description/bin'
+[0.375s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.ps1'
+[0.375s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.dsv'
+[0.375s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.sh'
+[0.375s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.bash'
+[0.375s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/package.zsh'
+[0.375s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_description/share/colcon-core/packages/ros_gz_example_description)
+[0.375s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_gazebo' with build type 'ament_cmake'
+[0.376s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_gazebo'
+[0.376s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.376s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.383s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake /home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo
+[0.462s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(harbour_assets_description)
+[0.463s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description' for CMake module files
+[0.463s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/harbour_assets_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/harbour_assets_description
+[0.463s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description' for CMake config files
+[0.463s] Level 1:colcon.colcon_core.shell:create_environment_hook('harbour_assets_description', 'cmake_prefix_path')
+[0.463s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.ps1'
+[0.464s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.dsv'
+[0.464s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.sh'
+[0.464s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/bin'
+[0.464s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/lib/pkgconfig/harbour_assets_description.pc'
+[0.464s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/lib/python3.10/site-packages'
+[0.464s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/bin'
+[0.464s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.ps1'
+[0.465s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.dsv'
+[0.465s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.sh'
+[0.465s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.bash'
+[0.465s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.zsh'
+[0.465s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/harbour_assets_description/share/colcon-core/packages/harbour_assets_description)
+[0.465s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(harbour_assets_description)
+[0.465s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description' for CMake module files
+[0.466s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description' for CMake config files
+[0.466s] Level 1:colcon.colcon_core.shell:create_environment_hook('harbour_assets_description', 'cmake_prefix_path')
+[0.466s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.ps1'
+[0.466s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.dsv'
+[0.466s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/hook/cmake_prefix_path.sh'
+[0.467s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/bin'
+[0.467s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/lib/pkgconfig/harbour_assets_description.pc'
+[0.467s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/lib/python3.10/site-packages'
+[0.467s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/harbour_assets_description/bin'
+[0.467s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.ps1'
+[0.467s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.dsv'
+[0.467s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.sh'
+[0.467s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.bash'
+[0.468s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/harbour_assets_description/share/harbour_assets_description/package.zsh'
+[0.468s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/harbour_assets_description/share/colcon-core/packages/harbour_assets_description)
+[1.782s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake /home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo
+[1.782s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_gazebo -- -j32 -l32
+[2.877s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_gazebo -- -j32 -l32
+[2.878s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_gazebo
+[2.994s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_gazebo)
+[2.995s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo' for CMake module files
+[2.995s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo' for CMake config files
+[2.995s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_gazebo' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_gazebo
+[2.995s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_gazebo', 'cmake_prefix_path')
+[2.995s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.ps1'
+[2.995s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.dsv'
+[2.996s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.sh'
+[2.996s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib'
+[2.996s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/bin'
+[2.996s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/pkgconfig/ros_gz_example_gazebo.pc'
+[2.996s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/python3.10/site-packages'
+[2.996s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/bin'
+[2.996s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.ps1'
+[2.997s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.dsv'
+[2.997s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.sh'
+[2.997s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.bash'
+[2.997s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.zsh'
+[2.997s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/colcon-core/packages/ros_gz_example_gazebo)
+[2.997s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_gazebo)
+[2.997s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo' for CMake module files
+[2.998s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo' for CMake config files
+[2.998s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_gazebo', 'cmake_prefix_path')
+[2.998s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.ps1'
+[2.998s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.dsv'
+[2.998s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/hook/cmake_prefix_path.sh'
+[2.998s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib'
+[2.998s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/bin'
+[2.998s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/pkgconfig/ros_gz_example_gazebo.pc'
+[2.998s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/python3.10/site-packages'
+[2.999s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/bin'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.ps1'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.dsv'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.sh'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.bash'
+[2.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/package.zsh'
+[2.999s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/colcon-core/packages/ros_gz_example_gazebo)
+[3.000s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_bringup' with build type 'ament_cmake'
+[3.000s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_bringup'
+[3.000s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.000s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.006s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake /home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_bringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/ros_gz_example_bringup
+[3.360s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake /home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_bringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/ros_gz_example_bringup
+[3.360s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_bringup -- -j32 -l32
+[3.387s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_bringup -- -j32 -l32
+[3.388s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_bringup
+[3.505s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_bringup)
+[3.505s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup' for CMake module files
+[3.506s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_bringup' returned '0': AMENT_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo:/home/loong/AGV_sim/src/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_bringup:/home/loong/AGV_sim/install/ros_gz_example_gazebo:/home/loong/AGV_sim/install/ros_gz_example_description:/home/loong/AGV_sim/install/ros_gz_example_application:/opt/ros/humble GZ_SIM_PLUGIN_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/lib/ros_gz_example_gazebo GZ_SIM_RESOURCE_PATH=/home/loong/AGV_sim/src/install/ros_gz_example_gazebo/share/ros_gz_example_gazebo/worlds:/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models:${GZ_SIM_RESOURCE_PATH} /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_bringup
+[3.506s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup' for CMake config files
+[3.506s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_bringup', 'cmake_prefix_path')
+[3.507s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.ps1'
+[3.507s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.dsv'
+[3.508s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.sh'
+[3.508s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/bin'
+[3.508s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/lib/pkgconfig/ros_gz_example_bringup.pc'
+[3.508s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/lib/python3.10/site-packages'
+[3.508s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/bin'
+[3.508s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.ps1'
+[3.509s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.dsv'
+[3.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.sh'
+[3.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.bash'
+[3.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.zsh'
+[3.509s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/colcon-core/packages/ros_gz_example_bringup)
+[3.510s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros_gz_example_bringup)
+[3.510s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup' for CMake module files
+[3.510s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup' for CMake config files
+[3.510s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros_gz_example_bringup', 'cmake_prefix_path')
+[3.510s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.ps1'
+[3.510s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.dsv'
+[3.511s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/hook/cmake_prefix_path.sh'
+[3.511s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/bin'
+[3.511s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/lib/pkgconfig/ros_gz_example_bringup.pc'
+[3.511s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/lib/python3.10/site-packages'
+[3.511s] Level 1:colcon.colcon_core.environment:checking '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/bin'
+[3.511s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.ps1'
+[3.511s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.dsv'
+[3.512s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.sh'
+[3.512s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.bash'
+[3.512s] INFO:colcon.colcon_core.shell:Creating package script '/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/package.zsh'
+[3.512s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/colcon-core/packages/ros_gz_example_bringup)
+[3.512s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[3.512s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[3.512s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[3.512s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[3.517s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[3.517s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[3.517s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[3.527s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[3.527s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/loong/AGV_sim/src/install/local_setup.ps1'
+[3.528s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/loong/AGV_sim/src/install/_local_setup_util_ps1.py'
+[3.528s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/loong/AGV_sim/src/install/setup.ps1'
+[3.529s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/loong/AGV_sim/src/install/local_setup.sh'
+[3.529s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/loong/AGV_sim/src/install/_local_setup_util_sh.py'
+[3.529s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/loong/AGV_sim/src/install/setup.sh'
+[3.530s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/loong/AGV_sim/src/install/local_setup.bash'
+[3.530s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/loong/AGV_sim/src/install/setup.bash'
+[3.530s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/loong/AGV_sim/src/install/local_setup.zsh'
+[3.530s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/loong/AGV_sim/src/install/setup.zsh'

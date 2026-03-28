@@ -1,0 +1,4 @@
+source;share/harbour_assets_description/local_setup.bash
+source;share/harbour_assets_description/local_setup.dsv
+source;share/harbour_assets_description/local_setup.sh
+source;share/harbour_assets_description/local_setup.zsh

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="container-multi-stack">
+    <static>true</static>
+    <link name='chassis'>
+      <pose>0 0 0 0 0 0</pose>
+
+      <!--
+        COLLISION: Simplified box primitive for container stack.
+        Reason: Original DAE mesh causes DART/ODE crash.
+        Approximation: ~12m × 6m × 8m (2 wide × 3 high)
+      -->
+      <collision name='collision'>
+        <pose>0 0 4 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>12.0 6.0 8.0</size>
+          </box>
+        </geometry>
+        <!-- FIX: Stiff contact surface to prevent interpenetration -->
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp>
+              <kd>100</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <!-- VISUAL: Keep original DAE mesh -->
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://container-multi-stack/container-multi-stack.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

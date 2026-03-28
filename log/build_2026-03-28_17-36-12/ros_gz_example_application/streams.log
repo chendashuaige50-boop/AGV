@@ -1,0 +1,21 @@
+[0.006s] Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_application': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_application -- -j32 -l32
+[0.039s] Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_application' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/ros_gz_example_application -- -j32 -l32
+[0.040s] Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_application': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_application
+[0.046s] -- Install configuration: ""
+[0.047s] -- Execute custom install script
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/package_run_dependencies/ros_gz_example_application
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/parent_prefix_path/ros_gz_example_application
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/ament_prefix_path.sh
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/ament_prefix_path.dsv
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/path.sh
+[0.047s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/environment/path.dsv
+[0.048s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.bash
+[0.048s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.sh
+[0.048s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.zsh
+[0.048s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/local_setup.dsv
+[0.048s] -- Symlinking: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.dsv
+[0.057s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ament_index/resource_index/packages/ros_gz_example_application
+[0.057s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/cmake/ros_gz_example_applicationConfig.cmake
+[0.057s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/cmake/ros_gz_example_applicationConfig-version.cmake
+[0.058s] -- Up-to-date symlink: /home/loong/AGV_sim/src/install/ros_gz_example_application/share/ros_gz_example_application/package.xml
+[0.081s] Invoked command in '/home/loong/AGV_sim/src/build/ros_gz_example_application' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/ros_gz_example_application

@@ -1,0 +1,35 @@
+# Web Dashboard Configuration
+
+# Flask Server
+server:
+  host: "0.0.0.0"
+  port: 5000
+  debug: false
+
+# ROS2 Integration
+ros2:
+  topic: "/diff_drive/odometry"
+  message_type: "nav_msgs/msg/Odometry"
+  node_name: "agv_pose_subscriber"
+
+# Vehicle State
+vehicle:
+  max_trajectory_points: 500
+  default_risk_index: 0.1
+  default_scenario: "Standard Operation"
+
+# Map Configuration
+map:
+  center_lat: 1.2821
+  center_lng: 103.858
+  default_zoom: 16
+
+  # Coordinate conversion (adjust based on your simulation scale)
+  # These values convert simulation coordinates (meters) to lat/lng offsets
+  lat_offset: 0.0001  # meters to latitude conversion factor
+  lng_offset: 0.0001  # meters to longitude conversion factor
+
+# Risk Heatmap
+heatmap:
+  grid_size: 20
+  simulation_area_size: 100.0  # meters

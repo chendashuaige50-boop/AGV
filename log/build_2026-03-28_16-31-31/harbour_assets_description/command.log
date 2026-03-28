@@ -1,0 +1,4 @@
+Invoking command in '/home/loong/AGV_sim/src/build/harbour_assets_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/harbour_assets_description -- -j32 -l32
+Invoked command in '/home/loong/AGV_sim/src/build/harbour_assets_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/loong/AGV_sim/src/build/harbour_assets_description -- -j32 -l32
+Invoking command in '/home/loong/AGV_sim/src/build/harbour_assets_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/harbour_assets_description
+Invoked command in '/home/loong/AGV_sim/src/build/harbour_assets_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/loong/AGV_sim/src/build/harbour_assets_description

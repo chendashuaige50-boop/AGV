@@ -1,0 +1,4 @@
+Invoking command in '/home/loong/AGV_sim/src/build/gazebo_models': /usr/bin/cmake /home/loong/AGV_sim/src/Gazebo_Harbour_Models/gazebo_models -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/gazebo_models
+Invoked command in '/home/loong/AGV_sim/src/build/gazebo_models' returned '0': /usr/bin/cmake /home/loong/AGV_sim/src/Gazebo_Harbour_Models/gazebo_models -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/gazebo_models
+Invoking command in '/home/loong/AGV_sim/src/build/gazebo_models': /usr/bin/cmake --build /home/loong/AGV_sim/src/build/gazebo_models -- -j32 -l32
+Invoked command in '/home/loong/AGV_sim/src/build/gazebo_models' returned '2': /usr/bin/cmake --build /home/loong/AGV_sim/src/build/gazebo_models -- -j32 -l32

@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="container40">
+    <static>true</static>
+    <link name='chassis'>
+      <pose>0 0 1.3 0 0 0</pose>
+
+      <!--
+        COLLISION: Simple box primitive instead of DAE mesh.
+        Reason: Original CONTAINER40.dae causes DART/ODE crash.
+        Standard 40ft container: 12.192m × 2.438m × 2.591m
+        Simplified to: 12m × 2.4m × 2.6m
+      -->
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>12.0 2.4 2.6</size>
+          </box>
+        </geometry>
+        <!--
+          FIX: Added surface contact parameters to prevent
+          robot from passing through the container.
+          High kp/kd creates stiff contact response.
+        -->
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp>
+              <kd>100</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <!-- VISUAL: Keep original DAE mesh for appearance -->
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://container40/CONTAINER40.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

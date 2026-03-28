@@ -1,0 +1,4 @@
+source;share/harbour_assets_description/environment/ament_prefix_path.sh
+source;share/harbour_assets_description/environment/harbour_assets_description.sh
+source;share/harbour_assets_description/environment/path.sh
+source;share/harbour_assets_description/environment/harbour_assets_description.dsv
