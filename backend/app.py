@@ -4,14 +4,33 @@ Flask Backend for Port AGV Digital Twin Dashboard
 Integrates ROS2 real-time data with Flask-SocketIO for web visualization
 """
 
-from flask import Flask, jsonify, render_template
-from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+import sys
 import threading
 import math
 import time
+import os
+import yaml
 from datetime import datetime
 from collections import deque
+
+# ---------------------------------------------------------------------------
+# FIX: Block eventlet before engineio import to prevent async driver mismatch.
+# See web_dashboard/app.py for detailed explanation.
+# ---------------------------------------------------------------------------
+_blocked = {}
+for _mod in ('eventlet', 'eventlet.wsgi', 'eventlet.green', 'eventlet.green.threading'):
+    if _mod not in sys.modules:
+        _blocked[_mod] = True
+        sys.modules[_mod] = None          # type: ignore[assignment]
+
+from flask import Flask, jsonify, render_template
+from flask_cors import CORS
+from flask_socketio import SocketIO, emit
+
+for _mod in _blocked:
+    if sys.modules.get(_mod) is None:
+        del sys.modules[_mod]
+del _blocked
 
 # ROS2 imports
 import rclpy
@@ -21,8 +40,27 @@ from nav_msgs.msg import Odometry
 app = Flask(__name__)
 CORS(app)
 
-# Initialize Socket.IO with threading mode (default)
-socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
+# Initialize Socket.IO with explicit threading mode
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading',
+                    logger=False, engineio_logger=False)
+
+# ============================================================================
+# Vehicle Source Configuration
+# Edit backend/config/vehicle_source.yaml to switch active vehicle.
+# Default: agv_ackermann  |  Fallback: diff_drive
+# ============================================================================
+_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config', 'vehicle_source.yaml')
+
+def _load_vehicle_config():
+    with open(_CONFIG_PATH, 'r') as f:
+        cfg = yaml.safe_load(f)
+    name = cfg['active_vehicle']
+    return name, cfg['vehicles'][name]
+
+ACTIVE_VEHICLE, _vehicle_cfg = _load_vehicle_config()
+ROS2_TOPIC = _vehicle_cfg['odom_topic']   # e.g. /agv/odometry
+VEHICLE_NS = _vehicle_cfg['namespace']    # e.g. /agv
+ROS2_MSG_TYPE = 'nav_msgs/msg/Odometry'
 
 # Global vehicle state (thread-safe access)
 vehicle_state = {
@@ -37,10 +75,6 @@ vehicle_state = {
 
 trajectory_history = deque(maxlen=500)
 state_lock = threading.Lock()
-
-# ROS2 configuration - subscribes to AGV odometry from ros_gz_bridge
-ROS2_TOPIC = '/diff_drive/odometry'
-ROS2_MSG_TYPE = 'nav_msgs/msg/Odometry'
 
 
 # ============================================================================
@@ -77,7 +111,7 @@ class AGVPoseSubscriber(Node):
 
     Gazebo Pose Subscription:
     
-    - Subscribes to /diff_drive/odometry (bridged from Gazebo via ros_gz_bridge)
+    - Subscribes to the active vehicle odometry topic (configured in vehicle_source.yaml)
     - Extracts position (x, y), orientation (quaternion → yaw), and velocity
     - Emits real-time data to Socket.IO clients
     """
@@ -208,7 +242,7 @@ def get_vehicle_state():
     """
     GET /vehicle_state
     Returns current vehicle state including pose, speed, and risk index
-    Data sourced from ROS2 /diff_drive/odometry topic
+    Data sourced from active vehicle odometry topic (see vehicle_source.yaml)
     """
     with state_lock:
         return jsonify({
@@ -312,7 +346,7 @@ if __name__ == '__main__':
     print("\nROS2 Integration:")
     print(f"  Topic: {ROS2_TOPIC}")
     print(f"  Type:  {ROS2_MSG_TYPE}")
-    print(f"  Model: diff_drive (from ros_gz_project_template)")
+    print(f"  Vehicle: {ACTIVE_VEHICLE}  (change via backend/config/vehicle_source.yaml)")
     print("=" * 60)
     print("\nAvailable endpoints:")
     print("  GET  /                 - Dashboard UI")
@@ -335,8 +369,13 @@ if __name__ == '__main__':
     print("=" * 60)
 
     # Run Flask-SocketIO server with threading mode
+    # FIX: debug=False + use_reloader=False to fix Ctrl+C not working.
+    # Root cause: debug=True causes Werkzeug to spawn a reloader child process.
+    # When Ctrl+C sends SIGINT to the main process, the reloader child survives
+    # and keeps the port open, making it impossible to stop without kill -9.
     try:
-        socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True, debug=True)
+        socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True,
+                     debug=False, use_reloader=False)
     except KeyboardInterrupt:
         print("\nShutting down server...")
     finally:

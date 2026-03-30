@@ -13,14 +13,37 @@ Development-period data flow:
 """
 
 import math
+import os
+import sys
 import time
 from collections import deque
 from datetime import datetime
 import threading
 
+# ---------------------------------------------------------------------------
+# FIX: Prevent python-engineio from auto-detecting eventlet.
+# Even with async_mode='threading', if eventlet is importable engineio's
+# async driver selection can silently pick eventlet internals, which breaks
+# session management for cross-thread emit() calls (the ROS2 callback thread).
+# This manifests as "Invalid session" errors and no real-time updates.
+# Blocking the import before engineio loads forces pure-threading mode.
+# ---------------------------------------------------------------------------
+_blocked = {}
+for _mod in ('eventlet', 'eventlet.wsgi', 'eventlet.green', 'eventlet.green.threading'):
+    if _mod not in sys.modules:
+        _blocked[_mod] = True
+        sys.modules[_mod] = None          # type: ignore[assignment]
+
+import yaml
 from flask import Flask, jsonify, render_template
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+
+# Restore module entries so other code is not permanently affected
+for _mod in _blocked:
+    if sys.modules.get(_mod) is None:
+        del sys.modules[_mod]
+del _blocked
 
 # ROS2
 import rclpy

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(find /home/loong/AGV_sim/src -name dashboard.html -o -name *.html)",
+      "Bash(python3 -c \"import socketio; print\\(socketio.async_drivers\\(\\)\\)\")",
+      "Bash(pip3 show:*)",
+      "Bash(pkill -f \"rviz2\")",
+      "Bash(curl -s http://localhost:5000/health)",
+      "Bash(curl -s http://localhost:5000/risk/current)",
+      "Bash(curl -s http://localhost:5000/risk/heatmap)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f''''Heatmap points: {len\\(d\\)}, first: {d[0]}''''\\)\")"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+# vehicle_source.yaml
+# ============================================================
+# 主车配置 — 切换此文件即可改变后端默认订阅的车辆
+#
+# 当前默认主车: agv_ackermann（论文实验车）
+# 回退基线:     diff_drive（原始基线，保留不删）
+#
+# 切换方法：
+#   把 active_vehicle 改为 "diff_drive" 即可回退到原始链路，
+#   无需修改任何 Python 代码。
+# ============================================================
+
+active_vehicle: agv_ackermann
+
+vehicles:
+  agv_ackermann:
+    odom_topic: /agv/odometry
+    cmd_topic: /agv/cmd_vel
+    base_frame: agv_ackermann
+    namespace: /agv
+
+  diff_drive:
+    odom_topic: /diff_drive/odometry
+    cmd_topic: /diff_drive/cmd_vel
+    base_frame: diff_drive
+    namespace: /diff_drive

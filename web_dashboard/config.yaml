@@ -7,8 +7,11 @@ server:
   debug: false
 
 # ROS2 Integration
+# Active vehicle: change topic to switch between vehicles
+#   agv_ackermann (default):  /agv/odometry
+#   diff_drive (fallback):    /diff_drive/odometry
 ros2:
-  topic: "/diff_drive/odometry"
+  topic: "/agv/odometry"
   message_type: "nav_msgs/msg/Odometry"
   node_name: "agv_pose_subscriber"
 

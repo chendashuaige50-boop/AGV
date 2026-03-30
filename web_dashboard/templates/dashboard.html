@@ -12,8 +12,8 @@
     <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
     <script src="{{ url_for('static', filename='js/leaflet-heat.js') }}"></script>
 
-    <!-- Socket.IO client -->
-    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <!-- Socket.IO client (cache-bust to prevent stale JS after updates) -->
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}?v=2"></script>
 
     <style>
         * {

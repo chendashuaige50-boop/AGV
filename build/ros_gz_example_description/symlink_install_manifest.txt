@@ -1,3 +1,5 @@
+/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models/agv_ackermann/model.config
+/home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models/agv_ackermann/model.sdf
 /home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models/diff_drive/model.config
 /home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models/diff_drive/model.sdf
 /home/loong/AGV_sim/src/install/ros_gz_example_description/share/ros_gz_example_description/models/rrbot/model.sdf
