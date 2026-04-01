@@ -1,6 +1,8 @@
+/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/launch/__pycache__/harbour_diff_drive.launch.cpython-310.pyc
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/launch/diff_drive.launch.py
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/launch/harbour_diff_drive.launch.py
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/launch/rrbot_setup.launch.py
+/home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/config/agv_ackermann.rviz
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/config/diff_drive.rviz
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/config/ros_gz_agv_ackermann_bridge.yaml
 /home/loong/AGV_sim/src/install/ros_gz_example_bringup/share/ros_gz_example_bringup/config/ros_gz_example_bridge.yaml

@@ -21,7 +21,17 @@
       "Read(//dev/**)",
       "Bash(kill -9 82738)",
       "Bash(fuser 5000/tcp)",
-      "Bash(pkill -f 'python3 app.py')"
+      "Bash(pkill -f 'python3 app.py')",
+      "Bash(fuser -k 5000/tcp)",
+      "Bash(python3 -m py_compile web_dashboard/odom_visual_helper.py)",
+      "Bash(python3 -m py_compile ros_gz_project_template/ros_gz_example_bringup/launch/harbour_diff_drive.launch.py)",
+      "Bash(chmod +x /home/loong/AGV_sim/src/scripts/start_gazebo.sh /home/loong/AGV_sim/src/scripts/start_controller.sh /home/loong/AGV_sim/src/scripts/start_web_dashboard.sh /home/loong/AGV_sim/src/scripts/start_all.sh /home/loong/AGV_sim/src/scripts/start_all_tmux.sh)",
+      "Bash(bash -n /home/loong/AGV_sim/src/scripts/start_gazebo.sh)",
+      "Bash(bash -n /home/loong/AGV_sim/src/scripts/start_controller.sh)",
+      "Bash(bash -n /home/loong/AGV_sim/src/scripts/start_web_dashboard.sh)",
+      "Bash(bash -n /home/loong/AGV_sim/src/scripts/start_all.sh)",
+      "Bash(bash -n /home/loong/AGV_sim/src/scripts/start_all_tmux.sh)",
+      "Bash(grep -v '^--$')"
     ]
   }
 }

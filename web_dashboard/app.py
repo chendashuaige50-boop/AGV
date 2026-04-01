@@ -4,7 +4,7 @@ Flask Backend for Port AGV Digital Twin Dashboard
 Integrates ROS2 real-time data with Flask-SocketIO for web visualization.
 
 Development-period data flow:
-  Gazebo → /diff_drive/odometry → AGVPoseSubscriber
+  Gazebo → /agv/odometry → AGVPoseSubscriber
       → risk_layer.query(x, y)      [terrain_query]
       → risk_fusion.fuse(...)        [rule-based risk assessment]
       → vehicle_state{}              [shared state]
@@ -122,8 +122,8 @@ try:
 except Exception:
     _cfg = {}
 
-# ROS2 topic from config (default falls back to diff_drive for compatibility)
-ROS2_TOPIC = _cfg.get('ros2', {}).get('topic', '/diff_drive/odometry')
+# ROS2 topic from config (agv_ackermann is the primary vehicle)
+ROS2_TOPIC = _cfg.get('ros2', {}).get('topic', '/agv/odometry')
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ def quaternion_to_yaw(q) -> float:
 
 class AGVPoseSubscriber(Node):
     """
-    ROS2 node: subscribes to /diff_drive/odometry.
+    ROS2 node: subscribes to vehicle odometry topic (configured in config.yaml).
 
     On every message:
       1. Extract x, y, heading, speed

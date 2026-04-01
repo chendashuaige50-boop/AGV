@@ -6,7 +6,7 @@
 
 The simulation layer. Contains robot models, world files, launch files, and bridge configs.
 
-- **harbour_diff_drive.sdf** — Main world with harbour scene, crane, containers, diff_drive AGV, and agv_ackermann
+- **harbour_diff_drive.sdf** — Main world with harbour scene, crane, containers, and agv_ackermann (diff_drive removed)
 - **agv_ackermann/model.sdf** — Ackermann-steered port truck (10 ton, 3m wheelbase)
 - **harbour_diff_drive.launch.py** — Launches Gazebo + ros_gz_bridge + RViz
 - **ros_gz_agv_ackermann_bridge.yaml** — Maps Gazebo ↔ ROS2 topics for agv_ackermann

@@ -24,8 +24,8 @@ AGV_sim/src/
 │
 ├── ros_gz_project_template/        # ROS2 + Gazebo simulation packages (read-only base)
 │   ├── ros_gz_example_bringup/     #   Launch files + bridge configs
-│   ├── ros_gz_example_description/ #   Robot models (diff_drive, agv_ackermann)
-│   └── ros_gz_example_gazebo/      #   World files (harbour_diff_drive.sdf)
+│   ├── ros_gz_example_description/ #   Robot models (agv_ackermann + archived diff_drive)
+│   └── ros_gz_example_gazebo/      #   World files (harbour scene)
 │
 ├── harbour_assets_description/     # Custom ROS2 package — port 3D models
 │   └── models/                     #   crane1, container40, container-multi-stack
