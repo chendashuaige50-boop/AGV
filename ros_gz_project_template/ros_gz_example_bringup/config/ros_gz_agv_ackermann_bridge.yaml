@@ -1,0 +1,43 @@
+---
+# ros_gz_agv_ackermann_bridge.yaml
+#
+# Bridge configuration for agv_ackermann — the primary (and only) vehicle.
+#
+# Topics bridged:
+#   - cmd_vel:      /agv/cmd_vel (ROS) ↔ /model/agv_ackermann/cmd_vel (Gazebo)
+#   - odometry:     /agv/odometry (ROS) ↔ /model/agv_ackermann/odometry (Gazebo)
+#   - joint_states: /agv/joint_states ↔ /world/demo/model/agv_ackermann/joint_state
+#
+# TF is NOT bridged here. Instead:
+#   - robot_state_publisher publishes the chassis -> wheels TF tree (from URDF + joint_states)
+#   - odom_tf_publisher broadcasts odom -> chassis (from /agv/odometry)
+# This avoids the frame naming and orientation conflicts caused by Gazebo PosePublisher
+# (which uses agv_ackermann/* prefixed frames with pre-rotated link orientations).
+
+# Control: ROS → Gazebo (send Twist commands)
+- ros_topic_name: "/agv/cmd_vel"
+  gz_topic_name: "/model/agv_ackermann/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+
+# Odometry: Gazebo → ROS
+- ros_topic_name: "/agv/odometry"
+  gz_topic_name: "/model/agv_ackermann/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# Joint states: Gazebo → ROS (consumed by robot_state_publisher)
+- ros_topic_name: "/agv/joint_states"
+  gz_topic_name: "/world/demo/model/agv_ackermann/joint_state"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  direction: GZ_TO_ROS
+
+# LaserScan: Gazebo → ROS (front 2D LiDAR)
+- ros_topic_name: "/agv/scan"
+  gz_topic_name: "/model/agv_ackermann/scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS

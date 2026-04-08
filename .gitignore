@@ -1,0 +1,7 @@
+# Keep generated Python cache files out of the repository.
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore nested Mercurial metadata from third-party model snapshots.
+.hg/

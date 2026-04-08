@@ -1,1 +1,0 @@
-Invoking command in '/home/loong/AGV_sim/src/build/ros_gz_example_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/loong/AGV_sim/src/ros_gz_project_template/ros_gz_example_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/loong/AGV_sim/src/install/ros_gz_example_description

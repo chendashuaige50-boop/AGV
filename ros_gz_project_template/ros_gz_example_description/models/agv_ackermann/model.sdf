@@ -1,0 +1,615 @@
+<?xml version="1.0" ?>
+<!--
+  agv_ackermann model — Port AGV Truck (Ackermann steering)
+  ============================================================
+  Dimensions reference: Volvo FH16 tractor unit (from volvofh16/model.sdf):
+    Chassis: 5.25 × 2.495 × 0.4 m (body)
+    Cab:     2.375 × 2.495 × 3.353 m
+    Wheel radius: ~0.55 m (volvofh16 had 0.882 m which is oversized)
+
+  Key geometry (all coords from model origin at z=0 = wheel axle height):
+    Wheel radius:    0.55 m
+    Wheel width:     0.35 m (cylinder length along axle)
+    Wheelbase:       3.0 m  (front axle +1.5m, rear axle -1.5m)
+    Track width:     2.2 m  (wheel centers at y = ±1.1 m)
+    Kingpin width:   2.0 m  (steering pivot separation)
+    Steering limit:  0.6 rad (~34°)
+
+  Namespace isolation:
+    Gazebo model name: agv_ackermann
+    cmd_vel topic:    /model/agv_ackermann/cmd_vel   (bridged to /agv/cmd_vel)
+    odometry topic:   /model/agv_ackermann/odometry  (bridged to /agv/odometry)
+    TF odom frame:    agv_ackermann/odom
+    TF base frame:    agv_ackermann
+
+  Control:
+    Plugin: ignition-gazebo-ackermann-steering-system
+    Subscribes to /model/agv_ackermann/cmd_vel (Twist)
+    Publishes    /model/agv_ackermann/odometry
+
+  Joints:
+    front_left_wheel_steering_joint  — revolute Z (steering pivot)
+    front_right_wheel_steering_joint — revolute Z (steering pivot)
+    front_left_wheel_joint           — revolute Z in link frame → Y rolling
+    front_right_wheel_joint          — revolute Z in link frame → Y rolling
+    rear_left_wheel_joint            — revolute Z in link frame → Y rolling (drive)
+    rear_right_wheel_joint           — revolute Z in link frame → Y rolling (drive)
+-->
+<sdf version="1.8">
+  <model name="agv_ackermann">
+    <!--
+      self_collide=false: chassis and wheel links share overlapping geometry.
+      This is intentional (simplified model) — disable to avoid internal forces.
+    -->
+    <self_collide>false</self_collide>
+
+    <!-- ================================================================
+         CHASSIS LINK
+         Main body link: carries vehicle body (frame + cab) and all mass.
+         Visual: Two boxes — low body frame + high cab.
+         Collision: Two simplified boxes.
+         Inertial: Combined truck tractor (~10000 kg total)
+             Box approx 6.0 × 2.5 × 0.5 m (body frame):
+               Ixx = m/12*(y^2+z^2) = 5000/12*(6.25+0.25) = 2708
+               Iyy = m/12*(x^2+z^2) = 5000/12*(36+0.25) = 15104
+               Izz = m/12*(x^2+y^2) = 5000/12*(36+6.25) = 17604
+         Center of mass: z = 0.85 (body frame center + partial cab influence)
+         Pose: model origin is at wheel axle height (z=0), chassis center at z=0.8
+    -->
+    <link name="chassis">
+      <!-- Center the chassis body over the wheelbase midpoint, at height z=0.8 -->
+      <pose>0 0 0.85 0 0 0</pose>
+      <inertial>
+        <!-- 8000 kg for frame, 2000 kg for cab — combined CoM estimate -->
+        <mass>10000</mass>
+        <inertia>
+          <!-- Body frame approx (5×2.5×0.5) + cab (2.5×2.5×2.5) combined rough estimate -->
+          <ixx>4500</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>20000</iyy>
+          <iyz>0</iyz>
+          <izz>23000</izz>
+        </inertia>
+      </inertial>
+
+      <!--
+        Visual 1: Body frame (low, long box — like volvofh16 chassis)
+        Reference volvofh16: chassis 5.25 × 2.495 × 0.4 m
+        Scaled slightly: 6.0 × 2.5 × 0.5 m (longer for port truck)
+        pose: offset z to put this visual at body frame height relative to chassis link center
+      -->
+      <visual name="visual_body_frame">
+        <pose>0 0 -0.55 0 0 0</pose>
+        <geometry>
+          <box><size>6.0 2.5 0.5</size></box>
+        </geometry>
+        <material>
+          <!-- Yellow-orange: standard port AGV color -->
+          <ambient>0.8 0.5 0.1 1</ambient>
+          <diffuse>0.9 0.6 0.1 1</diffuse>
+          <specular>0.3 0.2 0.0 1</specular>
+        </material>
+      </visual>
+
+      <!--
+        Visual 2: Cab (tall box on front)
+        Reference volvofh16: cabinet 2.375 × 2.495 × 3.353 m
+        Simplified: 2.5 × 2.4 × 2.5 m (cab is taller than body)
+        pose: positioned at front of vehicle above body frame
+      -->
+      <visual name="visual_cab">
+        <pose>1.5 0 0.7 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 2.4 2.5</size></box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.5 0.1 1</ambient>
+          <diffuse>0.9 0.6 0.1 1</diffuse>
+          <specular>0.3 0.2 0.0 1</specular>
+        </material>
+      </visual>
+
+      <!--
+        Collision 1: Body frame (same as visual_body_frame)
+        Using simplified box — no mesh needed.
+      -->
+      <collision name="collision_body_frame">
+        <pose>0 0 -0.55 0 0 0</pose>
+        <geometry>
+          <box><size>6.0 2.5 0.5</size></box>
+        </geometry>
+      </collision>
+
+      <!--
+        Collision 2: Cab (same as visual_cab)
+      -->
+      <collision name="collision_cab">
+        <pose>1.5 0 0.7 0 0 0</pose>
+        <geometry>
+          <box><size>2.5 2.4 2.5</size></box>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- ================================================================
+         FRONT LEFT WHEEL STEERING LINK
+         Massless pivot link between chassis and front left wheel.
+         Provides the steering rotation axis (revolute Z).
+         Pose: at front axle left side, slightly above wheel center.
+         Reference: vehicle_blue steering_link pattern.
+    -->
+    <link name="front_left_wheel_steering_link">
+      <!-- Front axle x=1.5, left wheel y=0.9 (steering pivot, slightly inward from wheel center 1.1) -->
+      <pose>1.5 0.9 0.05 0 0 0</pose>
+      <inertial>
+        <!-- Small mass for numerical stability, not physically significant -->
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.05</iyy>
+          <iyz>0</iyz>
+          <izz>0.05</izz>
+        </inertia>
+      </inertial>
+      <!-- Small visual cylinder to show steering pivot (optional debug aid) -->
+      <visual name="visual_steering_pivot_fl">
+        <geometry>
+          <cylinder><radius>0.05</radius><length>0.12</length></cylinder>
+        </geometry>
+        <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material>
+      </visual>
+    </link>
+
+    <!-- ================================================================
+         FRONT RIGHT WHEEL STEERING LINK
+    -->
+    <link name="front_right_wheel_steering_link">
+      <!-- Front axle x=1.5, right wheel y=-0.9 -->
+      <pose>1.5 -0.9 0.05 0 0 0</pose>
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.05</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>0.05</iyy><iyz>0</iyz><izz>0.05</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual_steering_pivot_fr">
+        <geometry>
+          <cylinder><radius>0.05</radius><length>0.12</length></cylinder>
+        </geometry>
+        <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material>
+      </visual>
+    </link>
+
+    <!-- ================================================================
+         FRONT LEFT WHEEL
+         Cylinder wheel, axis along Y (rotated -π/2 around X).
+         Pose: front axle, left side.
+         Inertial: 150 kg heavy truck tire
+           Cylinder r=0.55, h=0.35:
+             Izz = 0.5*m*r^2 = 0.5*150*0.3025 = 22.7
+             Ixx = Iyy = m/12*(3*r^2+h^2) = 150/12*(0.9075+0.1225) = 12.875
+    -->
+    <link name="front_left_wheel">
+      <!-- pose: front axle x=1.5, left y=1.1, wheel center z=0, rotated for cylinder axis Y -->
+      <pose>1.5 1.1 0 -1.5707 0 0</pose>
+      <inertial>
+        <mass>150</mass>
+        <inertia>
+          <ixx>12.9</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>12.9</iyy><iyz>0</iyz><izz>22.7</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual_front_left_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="collision_front_left_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <!--
+          Friction: high mu (rubber on concrete), fdir1 along tire rolling direction.
+          Following volvofh16/vehicle_blue pattern.
+        -->
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>0.5</mu2>
+              <fdir1>0 0 1</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp><kd>1e3</kd>
+              <max_vel>1.0</max_vel><min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <!-- ================================================================
+         FRONT RIGHT WHEEL
+    -->
+    <link name="front_right_wheel">
+      <pose>1.5 -1.1 0 -1.5707 0 0</pose>
+      <inertial>
+        <mass>150</mass>
+        <inertia>
+          <ixx>12.9</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>12.9</iyy><iyz>0</iyz><izz>22.7</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual_front_right_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="collision_front_right_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu><mu2>0.5</mu2><fdir1>0 0 1</fdir1>
+              <slip1>0.0</slip1><slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp><kd>1e3</kd>
+              <max_vel>1.0</max_vel><min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <!-- ================================================================
+         REAR LEFT WHEEL (drive wheel)
+         Same geometry as front wheels.
+    -->
+    <link name="rear_left_wheel">
+      <pose>-1.5 1.1 0 -1.5707 0 0</pose>
+      <inertial>
+        <mass>150</mass>
+        <inertia>
+          <ixx>12.9</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>12.9</iyy><iyz>0</iyz><izz>22.7</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual_rear_left_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="collision_rear_left_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <!-- Higher friction for rear drive wheels -->
+              <mu>1.0</mu><mu2>1.0</mu2><fdir1>0 0 1</fdir1>
+              <slip1>0.0</slip1><slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp><kd>1e3</kd>
+              <max_vel>1.0</max_vel><min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <!-- ================================================================
+         REAR RIGHT WHEEL (drive wheel)
+    -->
+    <link name="rear_right_wheel">
+      <pose>-1.5 -1.1 0 -1.5707 0 0</pose>
+      <inertial>
+        <mass>150</mass>
+        <inertia>
+          <ixx>12.9</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>12.9</iyy><iyz>0</iyz><izz>22.7</izz>
+        </inertia>
+      </inertial>
+      <visual name="visual_rear_right_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <collision name="collision_rear_right_wheel">
+        <geometry>
+          <cylinder><radius>0.55</radius><length>0.35</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu><mu2>1.0</mu2><fdir1>0 0 1</fdir1>
+              <slip1>0.0</slip1><slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e7</kp><kd>1e3</kd>
+              <max_vel>1.0</max_vel><min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <!-- ================================================================
+         LIDAR LINK (front-mounted 2D LiDAR)
+         Position: (3.0, 0, 0.6) in model frame — front bumper, body-top height.
+         This is FORWARD of the cab (cab ends at x≈2.75) so scan rays are
+         not occluded by the vehicle's own geometry.
+         Analogous to diff_drive's (0, 0, 0.5) which is on top of its chassis.
+         z=0.6 is just above body top (z=0.55), natural sensor mounting height.
+    -->
+    <link name="lidar_link">
+      <pose>3.0 0 0.6 0 0 0</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box><size>0.1 0.1 0.1</size></box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box><size>0.1 0.1 0.1</size></box>
+        </geometry>
+      </visual>
+      <sensor name='gpu_lidar' type='gpu_lidar'>
+        <pose>0 0 0 0 0 0</pose>
+        <topic>/model/agv_ackermann/scan</topic>
+        <gz_frame_id>lidar_link</gz_frame_id>
+        <update_rate>10</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.396263</min_angle>
+              <max_angle>1.396263</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0.0</min_angle>
+              <max_angle>0.0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.08</min>
+            <max>25.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
+
+    <joint name='lidar_joint' type='fixed'>
+      <parent>chassis</parent>
+      <child>lidar_link</child>
+    </joint>
+
+    <!-- ================================================================
+         JOINTS
+    -->
+
+    <!--
+      Front left steering joint: revolute around Z (yaw axis).
+      Connects chassis → front_left_wheel_steering_link.
+      Limits: ±0.6 rad (±34°) — reasonable for heavy truck.
+      use_parent_model_frame=1: axis Z is in the model's world frame.
+    -->
+    <joint name="front_left_wheel_steering_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>front_left_wheel_steering_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.6</lower>
+          <upper>+0.6</upper>
+          <velocity>1.0</velocity>
+          <effort>5000</effort>
+        </limit>
+        <dynamics>
+          <damping>10.0</damping>
+          <friction>1.0</friction>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!--
+      Front right steering joint: revolute around Z.
+      Connects chassis → front_right_wheel_steering_link.
+    -->
+    <joint name="front_right_wheel_steering_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>front_right_wheel_steering_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.6</lower>
+          <upper>+0.6</upper>
+          <velocity>1.0</velocity>
+          <effort>5000</effort>
+        </limit>
+        <dynamics>
+          <damping>10.0</damping>
+          <friction>1.0</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!--
+      Front left wheel joint: revolute, connects steering_link → front_left_wheel.
+      Axis Z in link frame. Due to wheel pose rotation (-1.5707 around X),
+      the wheel rolls around Y in world frame (correct rolling axis).
+      Reference: official ackermann_steering.sdf uses same pattern.
+    -->
+    <joint name="front_left_wheel_joint" type="revolute">
+      <parent>front_left_wheel_steering_link</parent>
+      <child>front_left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+        </limit>
+        <dynamics>
+          <damping>2.0</damping>
+          <friction>0.5</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- Front right wheel joint -->
+    <joint name="front_right_wheel_joint" type="revolute">
+      <parent>front_right_wheel_steering_link</parent>
+      <child>front_right_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+        </limit>
+        <dynamics>
+          <damping>2.0</damping>
+          <friction>0.5</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!--
+      Rear left wheel joint (DRIVE wheel): revolute, chassis → rear_left_wheel.
+      AckermannSteering drives these via left_joint parameter.
+    -->
+    <joint name="rear_left_wheel_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>rear_left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+        </limit>
+        <dynamics>
+          <damping>2.0</damping>
+          <friction>0.5</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- Rear right wheel joint (DRIVE wheel) -->
+    <joint name="rear_right_wheel_joint" type="revolute">
+      <parent>chassis</parent>
+      <child>rear_right_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+        </limit>
+        <dynamics>
+          <damping>2.0</damping>
+          <friction>0.5</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- ================================================================
+         ACKERMANN STEERING PLUGIN
+         Controls the vehicle via cmd_vel Twist messages.
+         Publishes odometry.
+         Namespace: model name "agv_ackermann" → topics /model/agv_ackermann/...
+    -->
+    <plugin
+      filename="ignition-gazebo-ackermann-steering-system"
+      name="gz::sim::systems::AckermannSteering">
+      <!--
+        left_joint / right_joint: specifies ALL drive wheels (front + rear).
+        Following the official example pattern (both front and rear listed).
+      -->
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
+
+      <!-- Steering joints (revolute Z) -->
+      <left_steering_joint>front_left_wheel_steering_joint</left_steering_joint>
+      <right_steering_joint>front_right_wheel_steering_joint</right_steering_joint>
+
+      <!--
+        kingpin_width: lateral distance between left/right steering pivot joints.
+        Steering link pivots are at y=±0.9, so kingpin_width = 1.8 m.
+      -->
+      <kingpin_width>1.8</kingpin_width>
+
+      <!-- steering_limit: max steer angle (rad). 0.6 rad ≈ 34° for heavy truck. -->
+      <steering_limit>0.6</steering_limit>
+
+      <!-- wheel_base: front-to-rear axle distance = 3.0 m -->
+      <wheel_base>3.0</wheel_base>
+
+      <!-- wheel_separation: rear left-to-right wheel center distance = 2.2 m -->
+      <wheel_separation>2.2</wheel_separation>
+
+      <!-- wheel_radius: tire radius = 0.55 m (realistic for Volvo FH16) -->
+      <wheel_radius>0.55</wheel_radius>
+
+      <!-- Velocity limits: port AGV max ~5 m/s (18 km/h) -->
+      <min_velocity>-2.0</min_velocity>
+      <max_velocity>5.0</max_velocity>
+
+      <!-- Acceleration limits: conservative for heavy vehicle -->
+      <min_acceleration>-2.0</min_acceleration>
+      <max_acceleration>2.0</max_acceleration>
+    </plugin>
+
+  </model>
+</sdf>

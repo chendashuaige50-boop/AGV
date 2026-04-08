@@ -1,0 +1,214 @@
+<?xml version="1.0" ?>
+<!--
+  Harbour AGV World (agv_ackermann only)
+
+  Port harbour environment with Ackermann-steered AGV for digital twin simulation.
+  Includes static harbour models: crane, containers, and port facilities.
+  NOTE: diff_drive has been removed from this world (archived, not deleted).
+
+  Control commands:
+    ros2 topic pub /agv/cmd_vel geometry_msgs/msg/Twist \
+      "{linear: {x: 1.0}, angular: {z: 0.3}}"
+
+  Monitor odometry:
+    ros2 topic echo /agv/odometry
+-->
+<sdf version="1.8">
+  <!-- World name "demo" matches bridge config: /world/demo/model/agv_ackermann/joint_state -->
+  <world name="demo">
+
+    <!--
+      FIX: Added explicit physics configuration.
+      Default physics step size (1ms) and solver iterations (50) can be
+      insufficient for stable contact resolution, causing jitter and
+      interpenetration. Tuned for stability:
+      - max_step_size 0.001: Standard 1ms timestep
+      - real_time_update_rate 1000: Aim for real-time
+      - solver iterations 50: Adequate for this scene complexity
+      - max_contacts 20: Enough for robot-obstacle contact
+    -->
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>10.0</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!-- Physics plugin -->
+    <plugin
+      filename="ignition-gazebo-physics-system"
+      name="ignition::gazebo::systems::Physics">
+    </plugin>
+
+    <!-- Sensors plugin -->
+    <plugin
+      filename="ignition-gazebo-sensors-system"
+      name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Scene broadcaster -->
+    <plugin
+      filename="ignition-gazebo-scene-broadcaster-system"
+      name="ignition::gazebo::systems::SceneBroadcaster">
+    </plugin>
+
+    <!-- User commands -->
+    <plugin
+      filename="ignition-gazebo-user-commands-system"
+      name="ignition::gazebo::systems::UserCommands">
+    </plugin>
+
+    <!--
+      FIX: Removed BasicSystem and FullSystem plugins.
+      These are example/demo plugins from ros_gz_example_gazebo that fail
+      to load with "IgnitionPluginHook symbol missing" errors, flooding
+      the console with error messages on every launch. They provide no
+      functionality needed by the harbour simulation.
+    -->
+
+    <!-- Sun light -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground plane (港口地面) -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <!--
+            FIX: Added ground surface properties.
+            Without explicit friction, ground-wheel contact is unreliable
+            causing slippage and jitter. High friction + stiff contact
+            ensures stable robot locomotion.
+          -->
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e6</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+            <specular>0.4 0.4 0.4 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ══════════════════════════════════════════════════════════
+         diff_drive model REMOVED from this world.
+         Archived to archive_pending_review/diff_drive_legacy/.
+         The agv_ackermann is now the sole vehicle.
+         ══════════════════════════════════════════════════════════ -->
+
+    <!-- AGV Ackermann — Primary vehicle (港口集卡 Ackermann 转向) -->
+    <model name="agv_ackermann">
+      <self_collide>false</self_collide>
+      <!-- Spawn at (5,3) — visible in default Gazebo camera view -->
+      <pose>5 3 0.58 0 0 0</pose>
+
+      <include merge="true">
+        <uri>package://ros_gz_example_description/models/agv_ackermann</uri>
+      </include>
+
+      <!-- JointStatePublisher: publishes wheel/steering joint states -->
+      <plugin
+        filename="ignition-gazebo-joint-state-publisher-system"
+        name="ignition::gazebo::systems::JointStatePublisher">
+      </plugin>
+
+      <!--
+        PosePublisher: publishes model link poses → bridges to /tf and /tf_static.
+        TF frames will be prefixed with model name: agv_ackermann/chassis, etc.
+        These are separate from diff_drive TF tree.
+      -->
+      <plugin
+        filename="ignition-gazebo-pose-publisher-system"
+        name="ignition::gazebo::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <static_publisher>true</static_publisher>
+        <static_update_frequency>10</static_update_frequency>
+      </plugin>
+
+      <!-- OdometryPublisher omitted: AckermannSteering publishes odometry directly.
+           PosePublisher already covers TF; adding OdometryPublisher would cause
+           TF_OLD_DATA warnings from duplicate frame timestamps. -->
+    </model>
+
+    <!-- Port Crane (岸桥) -->
+    <!-- Positioned to the left side, away from AGV spawn -->
+    <include>
+      <uri>package://harbour_assets_description/models/crane1</uri>
+      <name>port_crane</name>
+      <pose>-15 8 0 0 0 0</pose>
+    </include>
+
+    <!-- Container 40ft (集装箱) -->
+    <!--
+      FIX: Moved from (8,-3) to (8,-5) to increase clearance from AGV.
+      Closer placement risked contact at spawn causing physics instability.
+    -->
+    <include>
+      <uri>package://harbour_assets_description/models/container40</uri>
+      <name>container_single</name>
+      <pose>8 -5 0 0 0 1.57</pose>
+    </include>
+
+    <!-- Container Stack (集装箱堆) -->
+    <include>
+      <uri>package://harbour_assets_description/models/container-multi-stack</uri>
+      <name>container_stack</name>
+      <pose>-5 -15 0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

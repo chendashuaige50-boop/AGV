@@ -1,6 +1,0 @@
-gmake[2]: *** 没有规则可制作目标“/usr/lib/x86_64-linux-gnu/libgz-common5-profiler.so.5.7.1”，由“libBasicSystem.so” 需求。 停止。
-gmake[2]: *** 没有规则可制作目标“/usr/lib/x86_64-linux-gnu/libgz-common5-profiler.so.5.7.1”，由“libFullSystem.so” 需求。 停止。
-gmake[1]: *** [CMakeFiles/Makefile2:139：CMakeFiles/BasicSystem.dir/all] 错误 2
-gmake[1]: *** 正在等待未完成的任务....
-gmake[1]: *** [CMakeFiles/Makefile2:165：CMakeFiles/FullSystem.dir/all] 错误 2
-gmake: *** [Makefile:146：all] 错误 2

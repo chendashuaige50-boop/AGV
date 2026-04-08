@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<!--
+  agv_ackermann.urdf — RViz visualization model (standalone URDF tree)
+  =====================================================================
+  This URDF is consumed by robot_state_publisher, which:
+    1. Publishes /robot_description (for RViz RobotModel display)
+    2. Publishes TF for the entire robot tree from joint_states
+
+  TF chain:  odom -> chassis -> {steering_links -> wheels, rear_wheels}
+  The odom -> chassis transform comes from a separate odom_tf_publisher
+  node that converts /agv/odometry into a TF broadcast.
+
+  Coordinate convention (ROS standard, X-forward):
+    X = forward (vehicle driving direction)
+    Y = left
+    Z = up
+
+  Steering joints: revolute around Z (yaw steering)
+  Wheel spin joints: continuous around Y (lateral axle = rolling axis)
+
+  Wheel visual: cylinder with axis Z, rotated +90° around X in <origin>
+  so the cylinder lies flat with its axis along Y.
+
+  Geometry (matches model.sdf):
+    Wheelbase:     3.0 m (front +1.5, rear -1.5)
+    Track width:   2.2 m (wheel centers at y = ±1.1)
+    Wheel radius:  0.55 m
+    Wheel width:   0.35 m
+    Chassis body:  6.0 × 2.5 × 0.5 m, center at z=0.30 above base
+    Cab:           2.5 × 2.4 × 2.5 m, at x=+1.5, z=1.55 above base
+    Steering pivots: (±1.5, ±0.9, 0.05)
+    Base_link (chassis) origin: at ground level between axles (z=0)
+
+  NOTE: This URDF places chassis origin at wheel axle / ground height (z=0).
+  The SDF has chassis at z=0.85, but that's because SDF link poses are
+  in model frame. Here, URDF joints define the tree from chassis outward.
+-->
+<robot name="agv_ackermann">
+
+  <!-- ════════════════════════════════════════════════════════════════
+       CHASSIS (base_link)
+       Origin at ground level, centered between axles.
+       Body frame visual is raised so its bottom sits at axle height.
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="chassis">
+    <inertial>
+      <mass value="10000"/>
+      <origin xyz="0 0 0.85"/>
+      <inertia ixx="4500" ixy="0" ixz="0" iyy="20000" iyz="0" izz="23000"/>
+    </inertial>
+
+    <!-- Body frame: bottom at z≈0.05 (just above wheels), center at z=0.30 -->
+    <visual name="visual_body_frame">
+      <origin xyz="0 0 0.30" rpy="0 0 0"/>
+      <geometry>
+        <box size="6.0 2.5 0.5"/>
+      </geometry>
+      <material name="agv_yellow">
+        <color rgba="0.9 0.6 0.1 1"/>
+      </material>
+    </visual>
+
+    <!-- Cab on top of body frame, front of vehicle -->
+    <visual name="visual_cab">
+      <origin xyz="1.5 0 1.55" rpy="0 0 0"/>
+      <geometry>
+        <box size="2.5 2.4 2.5"/>
+      </geometry>
+      <material name="agv_yellow">
+        <color rgba="0.9 0.6 0.1 1"/>
+      </material>
+    </visual>
+
+    <collision name="collision_body">
+      <origin xyz="0 0 0.30" rpy="0 0 0"/>
+      <geometry>
+        <box size="6.0 2.5 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FRONT LEFT STEERING LINK + JOINT
+       Steering joint: revolute around Z (yaw)
+       Position: front axle, left side, at wheel center height
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="front_left_wheel_steering_link">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+    <visual name="visual_steering_pivot_fl">
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.30"/>
+      </geometry>
+      <material name="steer_red">
+        <color rgba="1.0 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_left_wheel_steering_joint" type="revolute">
+    <parent link="chassis"/>
+    <child link="front_left_wheel_steering_link"/>
+    <origin xyz="1.5 0.9 0.0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.6" upper="0.6" velocity="1.0" effort="5000"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FRONT RIGHT STEERING LINK + JOINT
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="front_right_wheel_steering_link">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+    <visual name="visual_steering_pivot_fr">
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.30"/>
+      </geometry>
+      <material name="steer_red">
+        <color rgba="1.0 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_right_wheel_steering_joint" type="revolute">
+    <parent link="chassis"/>
+    <child link="front_right_wheel_steering_link"/>
+    <origin xyz="1.5 -0.9 0.0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.6" upper="0.6" velocity="1.0" effort="5000"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FRONT LEFT WHEEL
+       Spin joint: continuous around Y (axle direction)
+       Cylinder visual: rotated +90° around X so axis lies along Y.
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="front_left_wheel">
+    <inertial>
+      <mass value="150"/>
+      <inertia ixx="12.9" ixy="0" ixz="0" iyy="22.7" iyz="0" izz="12.9"/>
+    </inertial>
+    <visual name="visual_fl_wheel">
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.55" length="0.35"/>
+      </geometry>
+      <material name="tire_black">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="front_left_wheel_steering_link"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0 0.2 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FRONT RIGHT WHEEL
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="front_right_wheel">
+    <inertial>
+      <mass value="150"/>
+      <inertia ixx="12.9" ixy="0" ixz="0" iyy="22.7" iyz="0" izz="12.9"/>
+    </inertial>
+    <visual name="visual_fr_wheel">
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.55" length="0.35"/>
+      </geometry>
+      <material name="tire_black">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="front_right_wheel_steering_link"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0 -0.2 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       REAR LEFT WHEEL (drive wheel, no steering link)
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="rear_left_wheel">
+    <inertial>
+      <mass value="150"/>
+      <inertia ixx="12.9" ixy="0" ixz="0" iyy="22.7" iyz="0" izz="12.9"/>
+    </inertial>
+    <visual name="visual_rl_wheel">
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.55" length="0.35"/>
+      </geometry>
+      <material name="tire_black">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-1.5 1.1 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       REAR RIGHT WHEEL (drive wheel, no steering link)
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="rear_right_wheel">
+    <inertial>
+      <mass value="150"/>
+      <inertia ixx="12.9" ixy="0" ixz="0" iyy="22.7" iyz="0" izz="12.9"/>
+    </inertial>
+    <visual name="visual_rr_wheel">
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.55" length="0.35"/>
+      </geometry>
+      <material name="tire_black">
+        <color rgba="0.15 0.15 0.15 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-1.5 -1.1 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       LIDAR LINK (front-mounted 2D LiDAR)
+       SDF pose: (3.0, 0, 0.6) in model frame — front bumper, body-top.
+       URDF origin: relative to chassis (at model origin z=0).
+       ════════════════════════════════════════════════════════════════ -->
+  <link name="lidar_link">
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.000166667" ixy="0" ixz="0" iyy="0.000166667" iyz="0" izz="0.000166667"/>
+    </inertial>
+    <visual name="visual">
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="lidar_link"/>
+    <origin xyz="3.0 0 0.6" rpy="0 0 0"/>
+  </joint>
+
+</robot>

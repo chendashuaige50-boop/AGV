@@ -1,1 +1,0 @@
-/home/loong/AGV_sim/src/build/harbour_assets_description/ament_cmake_environment_hooks/harbour_assets_description.sh
