@@ -23,6 +23,20 @@ AGV_PROJECT_ROOT="$(cd "${AGV_COMMON_ENV_DIR}/.." && pwd)"
 export AGV_COMMON_ENV_DIR
 export AGV_PROJECT_ROOT
 
+# Keep ROS runtime state inside the workspace when the caller did not provide
+# explicit locations, which avoids failures on machines where ~/.ros is
+# unavailable or read-only and keeps launch logs close to the project.
+if [[ -z "${ROS_HOME:-}" ]]; then
+  export ROS_HOME="${AGV_PROJECT_ROOT}/.ros"
+fi
+if [[ -z "${ROS_LOG_DIR:-}" ]]; then
+  export ROS_LOG_DIR="${ROS_HOME}/log"
+fi
+if [[ -z "${GZ_LOG_PATH:-}" ]]; then
+  export GZ_LOG_PATH="${AGV_PROJECT_ROOT}/.gz"
+fi
+mkdir -p "${ROS_HOME}" "${ROS_LOG_DIR}" "${GZ_LOG_PATH}" 2>/dev/null || true
+
 _agv_ros_candidates=()
 if [[ -n "${ROS_DISTRO:-}" ]]; then
   _agv_ros_candidates+=("${ROS_DISTRO}")

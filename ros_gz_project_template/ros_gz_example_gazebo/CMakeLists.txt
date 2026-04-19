@@ -16,16 +16,26 @@ set(GZ_PLUGIN_VER ${gz-plugin2_VERSION_MAJOR})
 find_package(gz-common5 REQUIRED COMPONENTS profiler)
 set(GZ_COMMON_VER ${gz-common5_VERSION_MAJOR})
 
-# Harmonic
+# Prefer explicit environment selection, otherwise auto-detect the available
+# Gazebo Sim development package on the current machine.
 if("$ENV{GZ_VERSION}" STREQUAL "harmonic")
   find_package(gz-sim8 REQUIRED)
   set(GZ_SIM_VER ${gz-sim8_VERSION_MAJOR})
-  message(STATUS "Compiling against Gazebo Harmonic")
-# Default to Garden
-else()
+  message(STATUS "Compiling against Gazebo Harmonic (forced by GZ_VERSION)")
+elseif("$ENV{GZ_VERSION}" STREQUAL "garden")
   find_package(gz-sim7 REQUIRED)
   set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
-  message(STATUS "Compiling against Gazebo Garden")
+  message(STATUS "Compiling against Gazebo Garden (forced by GZ_VERSION)")
+else()
+  find_package(gz-sim8 QUIET)
+  if(gz-sim8_FOUND)
+    set(GZ_SIM_VER ${gz-sim8_VERSION_MAJOR})
+    message(STATUS "Compiling against Gazebo Harmonic (auto-detected gz-sim8)")
+  else()
+    find_package(gz-sim7 REQUIRED)
+    set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
+    message(STATUS "Compiling against Gazebo Garden (auto-detected gz-sim7)")
+  endif()
 endif()
 
 

@@ -3,9 +3,7 @@
 {% block page_content %}
 <section class="page-head">
     <div>
-        <div class="page-kicker">Risk Assessment</div>
-        <div class="page-title">风险监测与评估</div>
-        <div class="page-subtitle">风险热区、重点监测区、单车风险与解释信息联动展示</div>
+        <div class="page-title page-title-no-kicker">风险监测与评估</div>
     </div>
     <div class="page-actions">
         <a class="btn" href="/">返回总览</a>
@@ -13,50 +11,138 @@
     </div>
 </section>
 
-<section class="kpi-grid">
-    <div class="kpi"><div class="kpi-label">综合风险</div><div class="kpi-value" id="riskKpiScore">0.000</div><div class="kpi-note" id="riskKpiLevel">低风险</div></div>
-    <div class="kpi"><div class="kpi-label">低风险点</div><div class="kpi-value" id="riskKpiLow">0</div><div class="kpi-note">热区采样</div></div>
-    <div class="kpi"><div class="kpi-label">中风险点</div><div class="kpi-value" id="riskKpiMedium">0</div><div class="kpi-note">热区采样</div></div>
-    <div class="kpi"><div class="kpi-label">高风险点</div><div class="kpi-value" id="riskKpiHigh">0</div><div class="kpi-note">热区采样</div></div>
-    <div class="kpi"><div class="kpi-label">监测区域</div><div class="kpi-value" id="riskKpiZones">3</div><div class="kpi-note">重点风险分区</div></div>
+<section class="kpi-grid risk-kpi-grid">
+    <div class="kpi risk-kpi-primary">
+        <div class="kpi-label">综合风险指数</div>
+        <div class="kpi-value" id="riskSummaryScore">0.000</div>
+        <div class="kpi-note" id="riskSummaryScoreNote">模型判定结果</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">当前风险等级</div>
+        <div class="kpi-value risk-kpi-text" id="riskSummaryLevel">低风险</div>
+        <div class="kpi-note" id="riskSummaryLevelNote">风险分级结果</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">高风险区数量</div>
+        <div class="kpi-value" id="riskSummaryHighZones">0</div>
+        <div class="kpi-note">空间重点防控</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">中风险区数量</div>
+        <div class="kpi-value" id="riskSummaryMediumZones">0</div>
+        <div class="kpi-note">需持续观测</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">重点关注区域</div>
+        <div class="kpi-value" id="riskSummaryFocusZones">0</div>
+        <div class="kpi-note">现有重点分区</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">当前预警车辆数</div>
+        <div class="kpi-value" id="riskSummaryAlertVehicles">0</div>
+        <div class="kpi-note">当前运行路径关联</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">当前告警状态</div>
+        <div class="kpi-value risk-kpi-text" id="riskSummaryAlarmState">正常监视</div>
+        <div class="kpi-note" id="riskSummaryAlarmNote">未触发运行级告警</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-label">数据更新时间</div>
+        <div class="kpi-value risk-kpi-time" id="riskSummaryUpdateTime">--</div>
+        <div class="kpi-note" id="riskSummaryUpdateNote">最新风险计算时间</div>
+    </div>
 </section>
 
 <section class="subject-grid risk-grid">
     <aside class="panel">
-        <div class="panel-head"><span class="panel-title">重点监测区</span><span class="badge badge-warn">风险分区</span></div>
+        <div class="panel-head">
+            <span class="panel-title">重点风险区域</span>
+            <span class="badge badge-warn" id="riskZoneCount">0 区</span>
+        </div>
         <div class="panel-body">
             <div class="list-stack" id="riskZoneList"></div>
         </div>
     </aside>
 
     <section class="panel map-panel">
-        <div class="panel-head"><span class="panel-title">风险热区分布</span><span class="badge badge-info" id="riskHeatmapCount">0 点</span></div>
+        <div class="panel-head">
+            <span class="panel-title">风险分区分布</span>
+            <span class="badge badge-info" id="riskHeatmapCount">0 点</span>
+        </div>
         <div class="panel-body">
             <div class="subject-map" id="riskMap"></div>
+            <div class="risk-map-controls" id="riskMapLayerControls">
+                <button class="chip-btn is-active" type="button" data-layer-toggle="zones">风险分区</button>
+                <button class="chip-btn is-active" type="button" data-layer-toggle="heat">风险热度</button>
+                <button class="chip-btn is-active" type="button" data-layer-toggle="insar">InSAR 分区</button>
+                <button class="chip-btn is-active" type="button" data-layer-toggle="trajectory">车辆轨迹</button>
+            </div>
+            <div class="risk-map-legend" id="riskMapLegend"></div>
             <div class="map-hud" id="riskMapHud">风险热力图加载中</div>
         </div>
     </section>
 
     <aside class="panel">
-        <div class="panel-head"><span class="panel-title">高风险对象与解释</span><span class="badge badge-safe" id="riskCurrentBadge">低风险</span></div>
-        <div class="panel-body">
-            <div class="detail-grid">
-                <div class="detail-card"><div class="detail-label">当前车辆</div><div class="detail-value" id="riskAgvId">agv-001</div></div>
-                <div class="detail-card"><div class="detail-label">地面风险</div><div class="detail-value" id="riskTerrain">--</div></div>
-                <div class="detail-card"><div class="detail-label">形变梯度</div><div class="detail-value" id="riskGradient">--</div></div>
-                <div class="detail-card"><div class="detail-label">车辆速度</div><div class="detail-value" id="riskSpeed">--</div></div>
+        <div class="panel-head">
+            <span class="panel-title">运行风险详情</span>
+            <div class="risk-detail-badges">
+                <span class="badge badge-info" id="riskDetailType">区域对象</span>
+                <span class="badge badge-safe" id="riskCurrentBadge">低风险</span>
             </div>
-            <div class="panel" style="margin-top:12px;box-shadow:none">
-                <div class="panel-head"><span class="panel-title">风险解释</span></div>
-                <div class="panel-body" style="padding:12px">
-                    <div id="riskReasonText" style="color:var(--text2);line-height:1.7">正常运行</div>
+        </div>
+        <div class="panel-body risk-detail-body">
+            <div class="risk-section">
+                <div class="risk-section-head">
+                    <span class="risk-section-title">基础信息</span>
+                    <span class="row-meta" id="riskDetailMeta">点击左侧区域或地图车辆查看</span>
+                </div>
+                <div class="detail-grid" id="riskInfoGrid"></div>
+            </div>
+
+            <div class="risk-section">
+                <div class="risk-section-head">
+                    <span class="risk-section-title">风险证据</span>
+                    <span class="row-meta">证据指标显式展示</span>
+                </div>
+                <div class="risk-evidence-grid" id="riskEvidenceGrid"></div>
+            </div>
+
+            <div class="risk-section">
+                <div class="risk-section-title">风险解释</div>
+                <div class="risk-copy" id="riskReasonText">等待风险对象接入</div>
+            </div>
+
+            <div class="risk-section">
+                <div class="risk-section-head">
+                    <span class="risk-section-title">告警与处置</span>
+                    <div class="risk-action-group">
+                        <button class="chip-btn" type="button" id="riskLocateBtn">定位区域</button>
+                        <button class="chip-btn" type="button" id="riskTraceBtn">查看轨迹</button>
+                        <button class="chip-btn" type="button" id="riskHistoryBtn">查看历史</button>
+                    </div>
+                </div>
+                <div class="risk-alert-grid" id="riskAlertMeta"></div>
+                <div class="risk-copy risk-copy-weak" id="riskDispatchSummary">等待调度建议</div>
+            </div>
+
+            <div class="risk-section">
+                <div class="risk-section-head">
+                    <span class="risk-section-title">历史趋势</span>
+                    <span class="row-meta" id="riskTrendMeta">最近样本尚少</span>
+                </div>
+                <div class="risk-trend-card">
+                    <div class="risk-sparkline" id="riskTrendSparkline"></div>
+                    <div class="timeline" id="riskHistoryList"></div>
                 </div>
             </div>
-            <div class="panel" style="margin-top:12px;box-shadow:none">
-                <div class="panel-head"><span class="panel-title">风险对象排行</span></div>
-                <div class="panel-body" style="padding:12px">
-                    <div class="list-stack" id="riskRankList"></div>
+
+            <div class="risk-section risk-status-section">
+                <div class="risk-section-head">
+                    <span class="risk-section-title">数据状态</span>
+                    <span class="row-meta" id="riskDataHealth">等待系统状态</span>
                 </div>
+                <div class="risk-status-list" id="riskDataStatusList"></div>
             </div>
         </div>
     </aside>

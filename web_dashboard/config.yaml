@@ -48,8 +48,9 @@ map:
   provider: simple
 
   # 地理坐标锚点 (osm/carto 模式使用, 仿真原点映射到此处)
-  center_lat: 1.2821
-  center_lng: 103.858
+  # 与周口港 InSAR 数据源保持一致，便于风险页在不改主框架的前提下叠加证据图层。
+  center_lat: 33.631
+  center_lng: 114.65
   default_zoom: 16
 
   # Coordinate conversion (adjust based on your simulation scale)

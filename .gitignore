@@ -7,6 +7,8 @@ __pycache__/
 build/
 install/
 log/
+.ros/
+.gz/
 
 # Ignore nested Mercurial metadata from third-party model snapshots.
 .hg/

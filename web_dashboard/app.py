@@ -160,6 +160,7 @@ SERVER_HOST = _server_cfg.get('host', '127.0.0.1')
 SERVER_PORT = int(_server_cfg.get('port', 5000))
 SERVER_DEBUG = bool(_server_cfg.get('debug', False))
 _scene_cfg = _cfg.get('scene', {}) if isinstance(_cfg.get('scene'), dict) else {}
+_map_cfg = _cfg.get('map', {}) if isinstance(_cfg.get('map'), dict) else {}
 
 
 def _resolve_config_path(path_value: str | None) -> str | None:
@@ -211,6 +212,12 @@ SCENE_CONTEXT = {
     'local_map_bounds': LOCAL_MAP_BOUNDS,
     'risk_layer_mode': _risk_layer_meta.get('mode', 'synthetic_compat'),
     'deformation_zones_file': DEFORMATION_ZONES_ID,
+    # Expose the map anchor so the risk page can convert WGS84 InSAR overlays
+    # onto the existing simulation plane without changing the main layout.
+    'map_anchor': {
+        'lat': float(_map_cfg.get('center_lat', 33.631)),
+        'lng': float(_map_cfg.get('center_lng', 114.65)),
+    },
     'corridors': _zones_cfg.get('corridors', _risk_layer_meta.get('corridors', {})),
     'zones': _zones_cfg.get('zones', _risk_layer_meta.get('zones', {})),
     'landmarks': _zones_cfg.get('landmarks', _risk_layer_meta.get('landmarks', {})),
