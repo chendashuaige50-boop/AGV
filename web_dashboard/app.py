@@ -515,7 +515,57 @@ def _get_heatmap() -> list:
 
 @app.route('/')
 def index():
-    return render_template('dashboard.html', scene_context=SCENE_CONTEXT)
+    return render_template(
+        'dashboard.html',
+        scene_context=SCENE_CONTEXT,
+        active_page='overview',
+    )
+
+
+def _render_platform_page(template_name: str, active_page: str, page_title: str):
+    """Render a full-screen platform topic page without changing API contracts."""
+    return render_template(
+        template_name,
+        scene_context=SCENE_CONTEXT,
+        active_page=active_page,
+        page_title=page_title,
+    )
+
+
+@app.route('/fleet')
+def fleet_page():
+    return _render_platform_page(
+        'fleet.html',
+        'fleet',
+        '港区车辆运行总览 - 港口数字孪生系统',
+    )
+
+
+@app.route('/risk')
+def risk_page():
+    return _render_platform_page(
+        'risk.html',
+        'risk',
+        '风险监测与评估 - 港口数字孪生系统',
+    )
+
+
+@app.route('/alerts')
+def alerts_page():
+    return _render_platform_page(
+        'alerts.html',
+        'alerts',
+        '告警事件中心 - 港口数字孪生系统',
+    )
+
+
+@app.route('/tasks')
+def tasks_page():
+    return _render_platform_page(
+        'tasks.html',
+        'tasks',
+        '任务执行与调度 - 港口数字孪生系统',
+    )
 
 
 @app.route('/health')

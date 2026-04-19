@@ -1,0 +1,64 @@
+{% extends "platform_layout.html" %}
+
+{% block page_content %}
+<section class="page-head">
+    <div>
+        <div class="page-kicker">Alert Center</div>
+        <div class="page-title">告警事件中心</div>
+        <div class="page-subtitle">车辆、区域、风险等级与任务事件统一汇聚</div>
+    </div>
+    <div class="page-actions">
+        <a class="btn" href="/">返回总览</a>
+        <select class="field" id="alertLevelFilter" style="width:140px">
+            <option value="all">全部级别</option>
+            <option value="critical">严重</option>
+            <option value="warn">警告</option>
+            <option value="info">信息</option>
+        </select>
+    </div>
+</section>
+
+<section class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">今日告警</div><div class="kpi-value" id="alertKpiTotal">0</div><div class="kpi-note">事件总量</div></div>
+    <div class="kpi"><div class="kpi-label">高等级</div><div class="kpi-value" id="alertKpiCritical">0</div><div class="kpi-note">严重告警</div></div>
+    <div class="kpi"><div class="kpi-label">中等级</div><div class="kpi-value" id="alertKpiWarn">0</div><div class="kpi-note">警告事件</div></div>
+    <div class="kpi"><div class="kpi-label">已处理</div><div class="kpi-value" id="alertKpiHandled">0</div><div class="kpi-note">演示处置态</div></div>
+    <div class="kpi"><div class="kpi-label">未处理</div><div class="kpi-value" id="alertKpiPending">0</div><div class="kpi-note">待确认事件</div></div>
+</section>
+
+<section class="subject-grid alerts-grid">
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">告警列表</span><span class="badge badge-info" id="alertListCount">0 条</span></div>
+        <div class="panel-body">
+            <div class="list-stack" id="alertCenterList"></div>
+        </div>
+    </aside>
+
+    <section class="panel">
+        <div class="panel-head"><span class="panel-title">告警详情</span><span class="badge badge-idle" id="alertDetailLevel">--</span></div>
+        <div class="panel-body">
+            <div class="detail-grid">
+                <div class="detail-card"><div class="detail-label">告警标题</div><div class="detail-value" id="alertDetailTitle">--</div></div>
+                <div class="detail-card"><div class="detail-label">关联车辆</div><div class="detail-value" id="alertDetailAgv">--</div></div>
+                <div class="detail-card"><div class="detail-label">发生区域</div><div class="detail-value" id="alertDetailZone">--</div></div>
+                <div class="detail-card"><div class="detail-label">发生时间</div><div class="detail-value" id="alertDetailTime">--</div></div>
+            </div>
+            <div class="panel" style="margin-top:12px;box-shadow:none">
+                <div class="panel-head"><span class="panel-title">事件描述</span></div>
+                <div class="panel-body" style="padding:12px;color:var(--text2);line-height:1.7" id="alertDetailMessage">暂无告警</div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">处置时间轴</span><span class="badge badge-warn">事件流</span></div>
+        <div class="panel-body">
+            <div class="timeline" id="alertTimeline"></div>
+        </div>
+    </aside>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='js/alerts-page.js') }}"></script>
+{% endblock %}

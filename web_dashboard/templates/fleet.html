@@ -1,0 +1,88 @@
+{% extends "platform_layout.html" %}
+
+{% block page_content %}
+<section class="page-head">
+    <div>
+        <div class="page-kicker">Fleet Operation</div>
+        <div class="page-title">港区车辆运行总览</div>
+        <div class="page-subtitle">无人集卡接入、作业状态、风险联动与当前位置分布</div>
+    </div>
+    <div class="page-actions">
+        <a class="btn" href="/">返回总览</a>
+        <button class="btn" id="fleetLocateBtn">定位当前车辆</button>
+    </div>
+</section>
+
+<section class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">接入车辆</div><div class="kpi-value" id="fleetKpiTotal">0</div><div class="kpi-note">平台登记车辆</div></div>
+    <div class="kpi"><div class="kpi-label">在线车辆</div><div class="kpi-value" id="fleetKpiOnline">0</div><div class="kpi-note">实时数据接入</div></div>
+    <div class="kpi"><div class="kpi-label">作业中</div><div class="kpi-value" id="fleetKpiActive">0</div><div class="kpi-note">执行任务车辆</div></div>
+    <div class="kpi"><div class="kpi-label">预警车辆</div><div class="kpi-value" id="fleetKpiAlert">0</div><div class="kpi-note">中高风险车辆</div></div>
+    <div class="kpi"><div class="kpi-label">离线车辆</div><div class="kpi-value" id="fleetKpiOffline">0</div><div class="kpi-note">无实时心跳</div></div>
+    <div class="kpi"><div class="kpi-label">平均速度</div><div class="kpi-value" id="fleetKpiSpeed">0.0</div><div class="kpi-note">m/s</div></div>
+</section>
+
+<section class="subject-grid fleet-grid">
+    <aside class="panel">
+        <div class="panel-head">
+            <span class="panel-title">车辆列表</span>
+            <span class="badge badge-online" id="fleetListCount">0 台</span>
+        </div>
+        <div class="panel-body">
+            <div style="display:grid;grid-template-columns:1fr 118px;gap:8px;margin-bottom:12px">
+                <input class="field" id="fleetSearch" type="search" placeholder="搜索车辆编号">
+                <select class="field" id="fleetFilter">
+                    <option value="all">全部</option>
+                    <option value="online">在线</option>
+                    <option value="active">作业中</option>
+                    <option value="alert">预警</option>
+                    <option value="offline">离线</option>
+                </select>
+            </div>
+            <div class="list-stack list-scroll" id="fleetPageList"></div>
+        </div>
+    </aside>
+
+    <section class="panel map-panel">
+        <div class="panel-head">
+            <span class="panel-title">车辆分布态势图</span>
+            <span class="badge badge-info">周口港</span>
+        </div>
+        <div class="panel-body">
+            <div class="subject-map" id="fleetMap"></div>
+            <div class="map-hud" id="fleetMapHud">当前车辆定位待接入</div>
+        </div>
+    </section>
+
+    <aside class="panel">
+        <div class="panel-head">
+            <span class="panel-title">当前车辆详情</span>
+            <span class="badge badge-idle" id="fleetDetailOnline">--</span>
+        </div>
+        <div class="panel-body">
+            <div class="detail-grid">
+                <div class="detail-card"><div class="detail-label">车辆编号</div><div class="detail-value" id="fleetDetailId">--</div></div>
+                <div class="detail-card"><div class="detail-label">当前状态</div><div class="detail-value" id="fleetDetailTask">--</div></div>
+                <div class="detail-card"><div class="detail-label">所在区域</div><div class="detail-value" id="fleetDetailZone">--</div></div>
+                <div class="detail-card"><div class="detail-label">当前风险</div><div class="detail-value" id="fleetDetailRisk">--</div></div>
+                <div class="detail-card"><div class="detail-label">经度</div><div class="detail-value" id="fleetDetailLng">--</div></div>
+                <div class="detail-card"><div class="detail-label">纬度</div><div class="detail-value" id="fleetDetailLat">--</div></div>
+                <div class="detail-card"><div class="detail-label">速度</div><div class="detail-value" id="fleetDetailSpeed">--</div></div>
+                <div class="detail-card"><div class="detail-label">航向</div><div class="detail-value" id="fleetDetailHeading">--</div></div>
+            </div>
+            <div class="panel" style="margin-top:12px;box-shadow:none">
+                <div class="panel-head"><span class="panel-title">单车任务与风险摘要</span></div>
+                <div class="panel-body" style="padding:12px">
+                    <div class="detail-row"><span class="detail-label">当前任务</span><strong id="fleetDetailCurrentTask">--</strong></div>
+                    <div class="detail-row" style="margin-top:10px"><span class="detail-label">最新事件</span><strong id="fleetDetailEvent">--</strong></div>
+                    <div class="timeline" style="margin-top:14px" id="fleetDetailTimeline"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='js/fleet-page.js') }}"></script>
+{% endblock %}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>港口数字孪生系统—无人集卡安全预警平台</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/platform.css') }}" />
     <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
     <script src="{{ url_for('static', filename='js/leaflet-heat.js') }}"></script>
     <script src="{{ url_for('static', filename='js/socket.io.min.js') }}?v=5"></script>
@@ -29,7 +30,7 @@
             --shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
             --shadow-glow: 0 0 0 1px rgba(93, 232, 255, 0.1), 0 0 30px rgba(24, 125, 255, 0.18);
             --r: 18px;
-            --top-h: 78px;
+            --top-h: 92px;
             --footer-h: 32px;
         }
         *{margin:0;padding:0;box-sizing:border-box}
@@ -138,11 +139,21 @@
             text-align:center;
         }
         .top-title-cn{
-            font-size:28px;
+            font-size:24px;
             font-weight:900;
             letter-spacing:.2em;
             color:var(--text);
             text-shadow:0 0 24px rgba(93,232,255,.24);
+        }
+        .top .platform-nav{
+            margin-top:6px;
+            padding:4px;
+            gap:5px;
+        }
+        .top .platform-nav a{
+            min-height:26px;
+            padding:0 10px;
+            font-size:11px;
         }
         .top-title-en{
             font-size:11px;
@@ -1287,6 +1298,13 @@
     </div>
     <div class="top-t">
         <span class="top-title-cn">港口数字孪生系统—无人集卡安全预警平台</span>
+        <nav class="platform-nav" aria-label="平台一级导航">
+            <a href="/" class="is-active">总览首页</a>
+            <a href="/fleet">港区车辆</a>
+            <a href="/risk">风险监测</a>
+            <a href="/alerts">告警中心</a>
+            <a href="/tasks">任务调度</a>
+        </nav>
     </div>
     <div class="top-s">
         <span class="status-pill"><span class="dot dg" id="dotBackend"></span><span class="status-label">平台服务</span><span id="statusBackend">在线</span></span>
@@ -1317,7 +1335,7 @@
     </div>
 
     <div class="c card-agv">
-        <div class="ch"><span class="ch-index">02</span> 无人集卡实时状态</div>
+        <div class="ch"><span class="ch-index">02</span> 无人集卡实时状态 <a class="card-link" href="/fleet">查看详情</a></div>
         <div class="cb">
             <div class="spotlight">
                 <div class="spotlight-label">车辆运行状态</div>
@@ -1435,7 +1453,7 @@
 <!-- ═══ Right: mission + control ═══ -->
 <div class="right">
     <div class="c card-mission">
-        <div class="ch"><span class="ch-index">03</span> 任务控制</div>
+        <div class="ch"><span class="ch-index">03</span> 任务控制 <a class="card-link" href="/tasks">查看详情</a></div>
         <div class="cb">
             <div class="spotlight">
                 <div class="spotlight-label">当前任务</div>
@@ -1474,7 +1492,7 @@
 <!-- ═══ Bottom: risk + alerts + system + layers ═══ -->
 <div class="bot">
     <div class="c c-tall card-risk" id="riskCard">
-        <div class="ch"><span class="ch-index">05</span> 风险评估</div>
+        <div class="ch"><span class="ch-index">05</span> 风险评估 <a class="card-link" href="/risk">查看详情</a></div>
         <div class="cb">
             <div class="risk-hero">
                 <div>
@@ -1506,7 +1524,7 @@
     </div>
 
     <div class="c c-tall card-alerts">
-        <div class="ch"><span class="ch-index">06</span> 最近告警</div>
+        <div class="ch"><span class="ch-index">06</span> 最近告警 <a class="card-link" href="/alerts">查看详情</a></div>
         <div class="cb">
             <div class="al" id="alertList">
                 <div style="color:var(--dim);font-size:12px;text-align:center;padding:10px">暂无告警</div>
@@ -1515,7 +1533,7 @@
     </div>
 
     <div class="c c-compact card-system">
-        <div class="ch"><span class="ch-index">07</span> 港区车辆总览</div>
+        <div class="ch"><span class="ch-index">07</span> 港区车辆总览 <a class="card-link" href="/fleet">查看详情</a></div>
         <div class="cb">
             <div class="fleet-stats">
                 <div class="fleet-stat">

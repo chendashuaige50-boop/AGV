@@ -1,0 +1,68 @@
+{% extends "platform_layout.html" %}
+
+{% block page_content %}
+<section class="page-head">
+    <div>
+        <div class="page-kicker">Risk Assessment</div>
+        <div class="page-title">风险监测与评估</div>
+        <div class="page-subtitle">风险热区、重点监测区、单车风险与解释信息联动展示</div>
+    </div>
+    <div class="page-actions">
+        <a class="btn" href="/">返回总览</a>
+        <button class="btn" id="riskRefreshBtn">刷新风险图层</button>
+    </div>
+</section>
+
+<section class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">综合风险</div><div class="kpi-value" id="riskKpiScore">0.000</div><div class="kpi-note" id="riskKpiLevel">低风险</div></div>
+    <div class="kpi"><div class="kpi-label">低风险点</div><div class="kpi-value" id="riskKpiLow">0</div><div class="kpi-note">热区采样</div></div>
+    <div class="kpi"><div class="kpi-label">中风险点</div><div class="kpi-value" id="riskKpiMedium">0</div><div class="kpi-note">热区采样</div></div>
+    <div class="kpi"><div class="kpi-label">高风险点</div><div class="kpi-value" id="riskKpiHigh">0</div><div class="kpi-note">热区采样</div></div>
+    <div class="kpi"><div class="kpi-label">监测区域</div><div class="kpi-value" id="riskKpiZones">3</div><div class="kpi-note">重点风险分区</div></div>
+</section>
+
+<section class="subject-grid risk-grid">
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">重点监测区</span><span class="badge badge-warn">风险分区</span></div>
+        <div class="panel-body">
+            <div class="list-stack" id="riskZoneList"></div>
+        </div>
+    </aside>
+
+    <section class="panel map-panel">
+        <div class="panel-head"><span class="panel-title">风险热区分布</span><span class="badge badge-info" id="riskHeatmapCount">0 点</span></div>
+        <div class="panel-body">
+            <div class="subject-map" id="riskMap"></div>
+            <div class="map-hud" id="riskMapHud">风险热力图加载中</div>
+        </div>
+    </section>
+
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">高风险对象与解释</span><span class="badge badge-safe" id="riskCurrentBadge">低风险</span></div>
+        <div class="panel-body">
+            <div class="detail-grid">
+                <div class="detail-card"><div class="detail-label">当前车辆</div><div class="detail-value" id="riskAgvId">agv-001</div></div>
+                <div class="detail-card"><div class="detail-label">地面风险</div><div class="detail-value" id="riskTerrain">--</div></div>
+                <div class="detail-card"><div class="detail-label">形变梯度</div><div class="detail-value" id="riskGradient">--</div></div>
+                <div class="detail-card"><div class="detail-label">车辆速度</div><div class="detail-value" id="riskSpeed">--</div></div>
+            </div>
+            <div class="panel" style="margin-top:12px;box-shadow:none">
+                <div class="panel-head"><span class="panel-title">风险解释</span></div>
+                <div class="panel-body" style="padding:12px">
+                    <div id="riskReasonText" style="color:var(--text2);line-height:1.7">正常运行</div>
+                </div>
+            </div>
+            <div class="panel" style="margin-top:12px;box-shadow:none">
+                <div class="panel-head"><span class="panel-title">风险对象排行</span></div>
+                <div class="panel-body" style="padding:12px">
+                    <div class="list-stack" id="riskRankList"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='js/risk-page.js') }}"></script>
+{% endblock %}

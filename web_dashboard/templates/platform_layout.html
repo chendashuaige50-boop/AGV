@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title or '港口数字孪生系统—无人集卡安全预警平台' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/platform.css') }}">
+</head>
+<body class="platform-body page-{{ active_page }}">
+    {% include '_platform_topbar.html' %}
+
+    <main class="platform-main">
+        {% block page_content %}{% endblock %}
+    </main>
+
+    <footer class="platform-footer">
+        <span>周口港 · 无人集卡安全预警平台</span>
+        <span><a href="/">返回总览</a> · <span id="bottomTime">--</span> · 港口数字孪生系统 v1.0</span>
+    </footer>
+
+    <script>
+        window.SCENE_CONTEXT = {{ scene_context | tojson }};
+        window.PLATFORM_ACTIVE_PAGE = {{ active_page | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/leaflet-heat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}?v=5"></script>
+    <script src="{{ url_for('static', filename='js/platform-common.js') }}"></script>
+    {% block page_scripts %}{% endblock %}
+</body>
+</html>

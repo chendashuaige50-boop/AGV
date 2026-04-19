@@ -1,0 +1,67 @@
+{% extends "platform_layout.html" %}
+
+{% block page_content %}
+<section class="page-head">
+    <div>
+        <div class="page-kicker">Task Dispatch</div>
+        <div class="page-title">任务执行与调度</div>
+        <div class="page-subtitle">任务路线、车辆绑定、执行进度与异常任务状态</div>
+    </div>
+    <div class="page-actions">
+        <a class="btn" href="/">返回总览</a>
+        <button class="btn btn-danger" id="taskCancelBtn">取消当前任务</button>
+    </div>
+</section>
+
+<section class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">当前任务</div><div class="kpi-value" id="taskKpiTotal">0</div><div class="kpi-note">可执行路线</div></div>
+    <div class="kpi"><div class="kpi-label">运行中</div><div class="kpi-value" id="taskKpiRunning">0</div><div class="kpi-note">车辆正在执行</div></div>
+    <div class="kpi"><div class="kpi-label">已完成</div><div class="kpi-value" id="taskKpiDone">0</div><div class="kpi-note">演示完成态</div></div>
+    <div class="kpi"><div class="kpi-label">异常任务</div><div class="kpi-value" id="taskKpiException">0</div><div class="kpi-note">风险或中止</div></div>
+    <div class="kpi"><div class="kpi-label">绑定车辆</div><div class="kpi-value" id="taskKpiVehicle">1</div><div class="kpi-note">YK-AGV-001</div></div>
+</section>
+
+<section class="subject-grid tasks-grid">
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">任务路线列表</span><span class="badge badge-info" id="taskRouteCount">0 条</span></div>
+        <div class="panel-body">
+            <div class="list-stack" id="taskRouteList"></div>
+        </div>
+    </aside>
+
+    <section class="panel">
+        <div class="panel-head"><span class="panel-title">路线执行进度</span><span class="badge badge-idle" id="taskModeBadge">待命</span></div>
+        <div class="panel-body">
+            <div class="detail-grid">
+                <div class="detail-card"><div class="detail-label">当前路线</div><div class="detail-value" id="taskRouteName">无</div></div>
+                <div class="detail-card"><div class="detail-label">绑定车辆</div><div class="detail-value">YK-AGV-001</div></div>
+                <div class="detail-card"><div class="detail-label">航点进度</div><div class="detail-value" id="taskWaypoint">--</div></div>
+                <div class="detail-card"><div class="detail-label">任务状态</div><div class="detail-value" id="taskRunningText">未运行</div></div>
+            </div>
+            <div style="margin-top:16px">
+                <div class="detail-row"><span class="detail-label">路线执行进度</span><strong id="taskProgressText">0%</strong></div>
+                <div class="progress-track" style="margin-top:8px"><div class="progress-fill" id="taskProgressFill" style="width:0%"></div></div>
+            </div>
+            <div class="panel" style="margin-top:12px;box-shadow:none">
+                <div class="panel-head"><span class="panel-title">车辆任务绑定关系</span></div>
+                <div class="panel-body" style="padding:12px">
+                    <div class="detail-row"><span class="detail-label">控制链路</span><strong>/mission/start → /agv/mission_cmd</strong></div>
+                    <div class="detail-row" style="margin-top:10px"><span class="detail-label">状态回传</span><strong>/agv/mission_status</strong></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="panel">
+        <div class="panel-head"><span class="panel-title">异常任务与事件</span><span class="badge badge-warn">联动</span></div>
+        <div class="panel-body">
+            <div class="list-stack" id="taskExceptionList"></div>
+            <div class="timeline" style="margin-top:14px" id="taskTimeline"></div>
+        </div>
+    </aside>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="{{ url_for('static', filename='js/tasks-page.js') }}"></script>
+{% endblock %}
