@@ -1,62 +1,230 @@
 {% extends "platform_layout.html" %}
 
+{% block page_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/alerts.css') }}">
+{% endblock %}
+
 {% block page_content %}
-<section class="page-head">
-    <div>
-        <div class="page-kicker">Alert Center</div>
-        <div class="page-title">告警事件中心</div>
-        <div class="page-subtitle">车辆、区域、风险等级与任务事件统一汇聚</div>
-    </div>
-    <div class="page-actions">
-        <a class="btn" href="/">返回总览</a>
-        <select class="field" id="alertLevelFilter" style="width:140px">
-            <option value="all">全部级别</option>
-            <option value="critical">严重</option>
-            <option value="warn">警告</option>
-            <option value="info">信息</option>
-        </select>
-    </div>
-</section>
-
-<section class="kpi-grid">
-    <div class="kpi"><div class="kpi-label">今日告警</div><div class="kpi-value" id="alertKpiTotal">0</div><div class="kpi-note">事件总量</div></div>
-    <div class="kpi"><div class="kpi-label">高等级</div><div class="kpi-value" id="alertKpiCritical">0</div><div class="kpi-note">严重告警</div></div>
-    <div class="kpi"><div class="kpi-label">中等级</div><div class="kpi-value" id="alertKpiWarn">0</div><div class="kpi-note">警告事件</div></div>
-    <div class="kpi"><div class="kpi-label">已处理</div><div class="kpi-value" id="alertKpiHandled">0</div><div class="kpi-note">演示处置态</div></div>
-    <div class="kpi"><div class="kpi-label">未处理</div><div class="kpi-value" id="alertKpiPending">0</div><div class="kpi-note">待确认事件</div></div>
-</section>
-
-<section class="subject-grid alerts-grid">
-    <aside class="panel">
-        <div class="panel-head"><span class="panel-title">告警列表</span><span class="badge badge-info" id="alertListCount">0 条</span></div>
-        <div class="panel-body">
-            <div class="list-stack" id="alertCenterList"></div>
+<div class="alerts-page">
+    <section class="alerts-hero">
+        <div class="alerts-hero-main">
+            <div class="page-title">告警事件中心</div>
+            <div class="page-subtitle">车辆、区域、风险等级与任务事件的一体化监测与处置专题页</div>
         </div>
-    </aside>
-
-    <section class="panel">
-        <div class="panel-head"><span class="panel-title">告警详情</span><span class="badge badge-idle" id="alertDetailLevel">--</span></div>
-        <div class="panel-body">
-            <div class="detail-grid">
-                <div class="detail-card"><div class="detail-label">告警标题</div><div class="detail-value" id="alertDetailTitle">--</div></div>
-                <div class="detail-card"><div class="detail-label">关联车辆</div><div class="detail-value" id="alertDetailAgv">--</div></div>
-                <div class="detail-card"><div class="detail-label">发生区域</div><div class="detail-value" id="alertDetailZone">--</div></div>
-                <div class="detail-card"><div class="detail-label">发生时间</div><div class="detail-value" id="alertDetailTime">--</div></div>
+        <div class="alerts-hero-context">
+            <div class="hero-context-card">
+                <span>当前港区</span>
+                <strong>周口港</strong>
             </div>
-            <div class="panel" style="margin-top:12px;box-shadow:none">
-                <div class="panel-head"><span class="panel-title">事件描述</span></div>
-                <div class="panel-body" style="padding:12px;color:var(--text2);line-height:1.7" id="alertDetailMessage">暂无告警</div>
+            <div class="hero-context-card">
+                <span>当前事件</span>
+                <strong id="alertHeroCurrent">等待告警接入</strong>
             </div>
+            <div class="hero-context-card">
+                <span>最近数据时间</span>
+                <strong id="alertDataTime">--</strong>
+            </div>
+        </div>
+        <div class="alerts-hero-actions">
+            <a class="btn" href="/">返回总览</a>
         </div>
     </section>
 
-    <aside class="panel">
-        <div class="panel-head"><span class="panel-title">处置时间轴</span><span class="badge badge-warn">事件流</span></div>
-        <div class="panel-body">
-            <div class="timeline" id="alertTimeline"></div>
-        </div>
-    </aside>
-</section>
+    <section class="alerts-kpis" aria-label="告警摘要指标">
+        <button class="alert-kpi is-active" data-alert-quick="all" type="button">
+            <span class="kpi-label">今日告警</span>
+            <strong id="alertKpiTotal">0</strong>
+            <span class="kpi-note">港区事件总量</span>
+        </button>
+        <button class="alert-kpi kpi-critical" data-alert-quick="critical" type="button">
+            <span class="kpi-label">高等级</span>
+            <strong id="alertKpiCritical">0</strong>
+            <span class="kpi-note">需优先处置</span>
+        </button>
+        <button class="alert-kpi kpi-warn" data-alert-quick="warn" type="button">
+            <span class="kpi-label">中等级</span>
+            <strong id="alertKpiWarn">0</strong>
+            <span class="kpi-note">需持续关注</span>
+        </button>
+        <button class="alert-kpi kpi-handled" data-alert-quick="handled" type="button">
+            <span class="kpi-label">已处理</span>
+            <strong id="alertKpiHandled">0</strong>
+            <span class="kpi-note">已归档或解除</span>
+        </button>
+        <button class="alert-kpi kpi-pending" data-alert-quick="pending" type="button">
+            <span class="kpi-label">未处理</span>
+            <strong id="alertKpiPending">0</strong>
+            <span class="kpi-note">等待确认</span>
+        </button>
+        <button class="alert-kpi kpi-active" data-alert-quick="active" type="button">
+            <span class="kpi-label">持续告警</span>
+            <strong id="alertKpiActive">0</strong>
+            <span class="kpi-note">尚未闭环</span>
+        </button>
+    </section>
+
+    <section class="alerts-main-grid">
+        <aside class="panel alert-list-panel">
+            <div class="panel-head">
+                <span class="panel-title">告警筛选与事件列表</span>
+                <span class="badge badge-info" id="alertListCount">0 条</span>
+            </div>
+            <div class="panel-body">
+                <div class="alert-filter-stack">
+                    <input class="field" id="alertSearch" type="search" placeholder="搜索车辆 / 标题 / 区域">
+                    <div class="alert-filter-row">
+                        <select class="field" id="alertLevelFilter">
+                            <option value="all">全部级别</option>
+                            <option value="critical">高等级</option>
+                            <option value="warn">中等级</option>
+                            <option value="info">低等级</option>
+                        </select>
+                        <select class="field" id="alertStatusFilter">
+                            <option value="all">全部状态</option>
+                            <option value="pending">未处理</option>
+                            <option value="processing">处理中</option>
+                            <option value="handled">已处理</option>
+                            <option value="closed">已关闭</option>
+                        </select>
+                    </div>
+                    <div class="alert-filter-row">
+                        <select class="field" id="alertTypeFilter">
+                            <option value="all">全部类型</option>
+                            <option value="deformation">地面形变</option>
+                            <option value="monitor_zone">重点监测区</option>
+                            <option value="overspeed">超速</option>
+                            <option value="communication">通信异常</option>
+                            <option value="mission">任务异常</option>
+                            <option value="offline">离线</option>
+                            <option value="system">系统运行</option>
+                        </select>
+                        <select class="field" id="alertZoneFilter">
+                            <option value="all">全部区域</option>
+                            <option value="focus">重点监测区</option>
+                            <option value="yard">集装箱堆场</option>
+                            <option value="operation">港机作业区</option>
+                            <option value="gate">港区接入点</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="alert-filter-summary" id="alertFilterSummary">显示全部告警</div>
+                <div class="alert-event-list list-scroll" id="alertCenterList"></div>
+            </div>
+        </aside>
+
+        <section class="panel alert-detail-panel">
+            <div class="panel-head">
+                <div>
+                    <span class="panel-title">当前告警综合研判与处置摘要</span>
+                    <div class="panel-subtitle">事件说明、风险解释与处置闭环信息</div>
+                </div>
+                <span class="badge badge-idle" id="alertDetailLevel">--</span>
+            </div>
+            <div class="panel-body">
+                <section class="alert-profile-card">
+                    <div>
+                        <span class="detail-label">当前告警</span>
+                        <strong id="alertDetailTitle">--</strong>
+                    </div>
+                    <span class="badge badge-idle" id="alertDetailStatusBadge">--</span>
+                </section>
+
+                <section class="alert-detail-section">
+                    <div class="detail-section-title">基础信息</div>
+                    <div class="detail-grid alert-basic-grid">
+                        <div class="detail-card"><div class="detail-label">告警编号</div><div class="detail-value" id="alertDetailId">--</div></div>
+                        <div class="detail-card"><div class="detail-label">发生时间</div><div class="detail-value" id="alertDetailTime">--</div></div>
+                        <div class="detail-card"><div class="detail-label">持续时长</div><div class="detail-value" id="alertDetailDuration">--</div></div>
+                        <div class="detail-card"><div class="detail-label">结束时间</div><div class="detail-value" id="alertDetailEndTime">--</div></div>
+                    </div>
+                </section>
+
+                <section class="alert-detail-section">
+                    <div class="detail-section-title">关联对象</div>
+                    <div class="linked-object-grid">
+                        <div class="linked-object"><span>关联车辆</span><strong id="alertDetailAgv">--</strong></div>
+                        <div class="linked-object"><span>发生区域</span><strong id="alertDetailZone">--</strong></div>
+                        <div class="linked-object"><span>关联任务</span><strong id="alertDetailTask">--</strong></div>
+                        <div class="linked-object"><span>重点监测区</span><strong id="alertDetailMonitorZone">--</strong></div>
+                    </div>
+                </section>
+
+                <section class="alert-detail-section">
+                    <div class="detail-section-title">事件说明</div>
+                    <div class="narrative-card">
+                        <p id="alertDetailMessage">暂无告警</p>
+                        <div class="narrative-impact" id="alertDetailImpact">等待事件接入后生成影响说明。</div>
+                    </div>
+                </section>
+
+                <section class="alert-detail-section">
+                    <div class="detail-section-title">风险解释</div>
+                    <div class="risk-explain-grid">
+                        <div class="risk-explain-card"><span>风险来源</span><strong id="alertRiskSource">--</strong></div>
+                        <div class="risk-explain-card"><span>风险评分</span><strong id="alertRiskScore">--</strong></div>
+                        <div class="risk-explain-card"><span>地面风险值</span><strong id="alertTerrainRisk">--</strong></div>
+                        <div class="risk-explain-card"><span>形变梯度</span><strong id="alertGradientRisk">--</strong></div>
+                    </div>
+                    <div class="risk-verdict" id="alertRiskVerdict">等待风险解释。</div>
+                </section>
+
+                <section class="alert-detail-section">
+                    <div class="detail-section-title">处置状态</div>
+                    <div class="handling-card">
+                        <div class="detail-row"><span class="detail-label">当前处置状态</span><strong id="alertHandlingStatus">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">是否需要人工确认</span><strong id="alertManualConfirm">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">处置意见</span><strong id="alertHandlingAdvice">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">已采取措施</span><strong id="alertHandlingAction">--</strong></div>
+                        <div class="close-condition" id="alertCloseCondition">关闭条件：等待处置策略生成。</div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <aside class="panel alert-side-panel">
+            <div class="panel-head">
+                <span class="panel-title">过程追溯与关联摘要</span>
+                <span class="badge badge-warn">事件流</span>
+            </div>
+            <div class="panel-body">
+                <section class="side-section">
+                    <div class="detail-section-title">事件时间轴</div>
+                    <div class="alert-timeline" id="alertTimeline"></div>
+                </section>
+                <section class="side-section">
+                    <div class="detail-section-title">关联车辆摘要</div>
+                    <div class="vehicle-summary-card">
+                        <div class="detail-row"><span class="detail-label">车辆编号</span><strong id="alertVehicleId">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">接入状态</span><strong id="alertVehicleOnline">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">运行状态</span><strong id="alertVehicleMode">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">当前任务</span><strong id="alertVehicleTask">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">风险等级</span><strong id="alertVehicleRisk">--</strong></div>
+                        <div class="detail-row"><span class="detail-label">位姿更新时间</span><strong id="alertVehiclePoseTime">--</strong></div>
+                    </div>
+                </section>
+                <section class="side-section">
+                    <div class="detail-section-title">重点提示</div>
+                    <div class="alert-hints" id="alertHintList"></div>
+                </section>
+            </div>
+        </aside>
+    </section>
+
+    <section class="alert-support-grid">
+        <section class="panel">
+            <div class="panel-head"><span class="panel-title">重点关注告警</span><span class="badge badge-danger" id="alertPriorityCount">Top 0</span></div>
+            <div class="panel-body compact-panel-body"><div class="alert-support-list" id="alertPriorityList"></div></div>
+        </section>
+        <section class="panel">
+            <div class="panel-head"><span class="panel-title">告警类型分布</span><span class="badge badge-info">类型</span></div>
+            <div class="panel-body compact-panel-body"><div class="alert-support-list" id="alertTypeSummary"></div></div>
+        </section>
+        <section class="panel">
+            <div class="panel-head"><span class="panel-title">高频告警区域</span><span class="badge badge-warn">区域</span></div>
+            <div class="panel-body compact-panel-body"><div class="alert-support-list" id="alertZoneSummary"></div></div>
+        </section>
+    </section>
+</div>
 {% endblock %}
 
 {% block page_scripts %}

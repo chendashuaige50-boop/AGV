@@ -6,6 +6,7 @@
     <title>{{ page_title or '港口数字孪生系统—无人集卡安全预警平台' }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/platform.css') }}">
+    {% block page_styles %}{% endblock %}
 </head>
 <body class="platform-body page-{{ active_page }}">
     {% include '_platform_topbar.html' %}

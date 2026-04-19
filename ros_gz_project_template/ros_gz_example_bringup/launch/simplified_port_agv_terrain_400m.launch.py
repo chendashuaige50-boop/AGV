@@ -68,7 +68,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),
         launch_arguments={'gz_args': '-r ' + os.path.join(
-            pkg_project_gazebo, 'worlds', 'simplified_port_agv_terrain_400m.sdf')
+            pkg_project_gazebo, 'worlds', 'simplified_port_agv_terrain_400m.sdf'),
+            'on_exit_shutdown': ''
         }.items(),
     )
 

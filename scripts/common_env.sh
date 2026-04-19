@@ -22,6 +22,8 @@ AGV_COMMON_ENV_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGV_PROJECT_ROOT="$(cd "${AGV_COMMON_ENV_DIR}/.." && pwd)"
 export AGV_COMMON_ENV_DIR
 export AGV_PROJECT_ROOT
+AGV_ROS_DOMAIN_ID_PRESET="${ROS_DOMAIN_ID+x}"
+AGV_ROS_LOCALHOST_ONLY_PRESET="${ROS_LOCALHOST_ONLY+x}"
 
 # Keep ROS runtime state inside the workspace when the caller did not provide
 # explicit locations, which avoids failures on machines where ~/.ros is
@@ -99,6 +101,17 @@ else
 fi
 export AGV_WS_SETUP
 export AGV_WS_SETUP_LOADED
+
+# Keep the default local simulation isolated from unrelated ROS 2 systems on
+# DDS domain 0. Users can still override either variable before sourcing.
+if [[ -z "${AGV_ROS_DOMAIN_ID_PRESET}" ]]; then
+  unset ROS_DOMAIN_ID
+fi
+if [[ -z "${AGV_ROS_LOCALHOST_ONLY_PRESET}" ]]; then
+  unset ROS_LOCALHOST_ONLY
+fi
+export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-${AGV_ROS_DOMAIN_ID:-77}}"
+export ROS_LOCALHOST_ONLY="${ROS_LOCALHOST_ONLY:-1}"
 
 _agv_common_env_note "PROJECT_ROOT=${AGV_PROJECT_ROOT}"
 _agv_common_env_note "ROS_DISTRO=${ROS_DISTRO:-${AGV_ROS_DISTRO_SELECTED}}"
